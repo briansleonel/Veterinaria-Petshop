@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { FooterComponent } from './components/layout/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/layout/header/header.component';
+import { CatalogoComponent } from './components/petshop/catalogo/catalogo.component';
+import { ProductoComponent } from './components/petshop/producto/producto.component';
+import { CarritoCompraComponent } from './components/petshop/carrito-compra/carrito-compra.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +16,9 @@ import { HeaderComponent } from './components/layout/header/header.component';
     FooterComponent,
     HomeComponent,
     HeaderComponent,
+    CatalogoComponent,
+    ProductoComponent,
+    CarritoCompraComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,13 @@
-<header class="">
-    el header
+<header class="row m-0">
+    <div class="col-3">
+        Logo
+    </div>
+    <div class="col-9">
+        <h1 class="fs-1 fw-bold">Don Braulio</h1>
+        <h2>Clínica Veterinaria</h2>
+    </div>
 </header>
-<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-white">
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark">
     <div class="container-fluid">
         <button
             class="navbar-toggler"
@@ -14,7 +20,7 @@
         >
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="row collapse navbar-collapse" id="navbarTogglerDemo02">
+        <div class="row collapse navbar-collapse p-3 p-sm-0" id="navbarTogglerDemo02">
             <ul class="navbar-nav col-12 col-sm-9 me-auto mb-2 mb-lg-0 d-flex justify-content-evenly">
                 <li class="nav-item" routerLinkActive="active">
                     <a class="nav-link active" [routerLink]="['']">Home</a>
@@ -27,20 +33,32 @@
                         <li><a class="dropdown-item" [routerLink]="['']">Servicios</a></li>
                     </ul>
                 </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Petshop</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                        <li><a class="dropdown-item" [routerLink]="['tienda']">Tienda</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['carrito-compra']">Mi carrito</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['']">Gestionar productos</a></li>
+                    </ul>
+                </li>
                 
                 <li class="nav-item ">
                     <a class="nav-link active" [routerLink]="['']">Petshop</a>
                 </li>
 
+                <li class="nav-item ">
+                    <a class="nav-link active" [routerLink]="['']">Gestionar productos</a>
+                </li>
+                <!--
                 <li class="nav-item">
                     <a class="nav-link active" [routerLink]="['']">Nosotros</a>
-                    
                 </li>
-                
+                -->
             </ul>
             <form class="col-12 col-sm-3 row p-0 m-0 d-flex justify-content-evenly">
-                <button class="btn btn-success col-12 col-sm-5 " type="button">Regístrese</button>
-                <button class="btn btn-light col-12 col-sm-5 mt-2 mt-sm-0" type="button">Ingresar</button>
+                <button class="btn btn-success btn-sm col-12 col-sm-5 " type="button">Crear cuenta</button>
+                <button class="btn btn-light btn-sm col-12 col-sm-5 mt-2 mt-sm-0" type="button">Ingresar</button>
             </form>
         </div>
     </div>
