@@ -12,6 +12,9 @@ import { CarritoCompraComponent } from './components/petshop/carrito-compra/carr
 import { FormsModule } from '@angular/forms';
 import { ContinuarCompraComponent } from './components/petshop/continuar-compra/continuar-compra.component';
 import { ProductosComponent } from './components/gestion/productos/productos.component';
+import { SeleccionPagoComponent } from './components/petshop/seleccion-pago/seleccion-pago.component';
+import { SeleccionEnvioComponent } from './components/petshop/seleccion-envio/seleccion-envio.component';
+import { ConfirmarPedidoComponent } from './components/petshop/confirmar-pedido/confirmar-pedido.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,9 @@ import { ProductosComponent } from './components/gestion/productos/productos.com
     CarritoCompraComponent,
     ContinuarCompraComponent,
     ProductosComponent,
+    SeleccionPagoComponent,
+    SeleccionEnvioComponent,
+    ConfirmarPedidoComponent,
   ],
   imports: [
     BrowserModule,

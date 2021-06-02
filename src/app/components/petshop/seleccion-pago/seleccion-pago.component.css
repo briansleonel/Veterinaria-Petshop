@@ -1,0 +1,23 @@
+.container {
+    background-color: #DCDCDC !important;
+}
+
+.card, .bd-callout {
+    -webkit-box-shadow: 0px 0px 4px 0px rgba(136,136,136,1);
+    -moz-box-shadow: 0px 0px 4px 0px rgba(136,136,136,1);
+    box-shadow: 0px 0px 4px 0px rgba(136,136,136,1);;
+}
+
+.bd-callout {
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #e9ecef;
+    border-left-width: .25rem;
+    border-radius: .25rem;
+    background-color: white;
+}
+
+.bd-callout-primary {
+    border-left-color: #0d6efd;
+}
