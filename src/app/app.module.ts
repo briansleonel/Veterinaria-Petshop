@@ -9,6 +9,8 @@ import { HeaderComponent } from './components/layout/header/header.component';
 import { CatalogoComponent } from './components/petshop/catalogo/catalogo.component';
 import { ProductoComponent } from './components/petshop/producto/producto.component';
 import { CarritoCompraComponent } from './components/petshop/carrito-compra/carrito-compra.component';
+import { FormsModule } from '@angular/forms';
+import { ContinuarCompraComponent } from './components/petshop/continuar-compra/continuar-compra.component';
 
 @NgModule({
   declarations: [
@@ -19,10 +21,12 @@ import { CarritoCompraComponent } from './components/petshop/carrito-compra/carr
     CatalogoComponent,
     ProductoComponent,
     CarritoCompraComponent,
+    ContinuarCompraComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

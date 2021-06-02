@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { CarritoCompraComponent } from './components/petshop/carrito-compra/carrito-compra.component';
 import { CatalogoComponent } from './components/petshop/catalogo/catalogo.component';
+import { ContinuarCompraComponent } from './components/petshop/continuar-compra/continuar-compra.component';
 import { ProductoComponent } from './components/petshop/producto/producto.component';
 
 const routes: Routes = [
@@ -10,7 +11,8 @@ const routes: Routes = [
   {path: 'tienda', component: CatalogoComponent},
   {path: 'tienda/product', component: ProductoComponent},
   {path: 'tienda/product/:id', component: ProductoComponent},
-  {path: 'carrito-compra', component: CarritoCompraComponent}
+  {path: 'carrito-compra', component: CarritoCompraComponent},
+  {path: 'carrito-compra/continuar-compra', component: ContinuarCompraComponent}
 ];
 
 @NgModule({
