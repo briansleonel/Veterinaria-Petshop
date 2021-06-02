@@ -11,6 +11,7 @@ import { ProductoComponent } from './components/petshop/producto/producto.compon
 import { CarritoCompraComponent } from './components/petshop/carrito-compra/carrito-compra.component';
 import { FormsModule } from '@angular/forms';
 import { ContinuarCompraComponent } from './components/petshop/continuar-compra/continuar-compra.component';
+import { ProductosComponent } from './components/gestion/productos/productos.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ContinuarCompraComponent } from './components/petshop/continuar-compra/
     ProductoComponent,
     CarritoCompraComponent,
     ContinuarCompraComponent,
+    ProductosComponent,
   ],
   imports: [
     BrowserModule,
