@@ -9,6 +9,7 @@ import { SeleccionEnvioComponent } from './components/petshop/seleccion-envio/se
 import { SeleccionPagoComponent } from './components/petshop/seleccion-pago/seleccion-pago.component';
 import { ProductoformComponent } from './components/gestion/productoform/productoform/productoform.component';
 import { ProductosComponent } from './components/gestion/productos/productos.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -20,7 +21,8 @@ const routes: Routes = [
   {path: 'carrito-compra/select-envio', component: SeleccionEnvioComponent},
   {path: 'carrito-compra/detalles', component: ConfirmarPedidoComponent},
   {path: 'productos', component: ProductosComponent},
-  {path: 'productos/alta', component: ProductoformComponent}
+  {path: 'productos/alta', component: ProductoformComponent},
+  {path: 'login', component: LoginComponent}
 ];
 
 @NgModule({
