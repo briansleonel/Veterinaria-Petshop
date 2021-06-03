@@ -1,0 +1,13 @@
+.fondo{
+    background: url('../../../../assets/img/Gestion-Productos/fondo.jpg');
+}
+.fondo-frente{
+    background: linear-gradient(90deg,  rgba(9, 11, 12,0.6) 0% , rgba(60, 141, 247,0.4) 100%);
+}
+
+.filtros{
+    box-shadow: 0 0px 15px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 40%;
+   
+    
+}

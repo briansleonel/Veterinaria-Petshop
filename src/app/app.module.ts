@@ -15,6 +15,7 @@ import { ProductosComponent } from './components/gestion/productos/productos.com
 import { SeleccionPagoComponent } from './components/petshop/seleccion-pago/seleccion-pago.component';
 import { SeleccionEnvioComponent } from './components/petshop/seleccion-envio/seleccion-envio.component';
 import { ConfirmarPedidoComponent } from './components/petshop/confirmar-pedido/confirmar-pedido.component';
+import { NgxDataTableModule } from 'angular-9-datatable';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ConfirmarPedidoComponent } from './components/petshop/confirmar-pedido/
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    NgxDataTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
