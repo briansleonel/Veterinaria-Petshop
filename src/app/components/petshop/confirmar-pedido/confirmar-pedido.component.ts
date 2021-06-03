@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { SuccesBuysComponent } from '../../utils/succes-buys/succes-buys.component';
 
 @Component({
   selector: 'app-confirmar-pedido',
@@ -9,14 +11,21 @@ import { Router } from '@angular/router';
 export class ConfirmarPedidoComponent implements OnInit {
 
   constructor(
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
   }
 
   confirmarPedido(): void {
-    
+    const dialogRef = this.dialog.open(SuccesBuysComponent, {data: ''});
+    dialogRef.afterClosed().subscribe(
+      (res) => {
+        if(res)
+          console.log("Descargar comprobante ", res)
+      }
+    )
   }
 
   volver(): void {

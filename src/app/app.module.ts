@@ -17,6 +17,10 @@ import { SeleccionEnvioComponent } from './components/petshop/seleccion-envio/se
 import { ConfirmarPedidoComponent } from './components/petshop/confirmar-pedido/confirmar-pedido.component';
 import { NgxDataTableModule } from 'angular-9-datatable';
 import { LoginComponent } from './components/login/login.component';
+import { SuccesBuysComponent } from './components/utils/succes-buys/succes-buys.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatDialogModule } from '@angular/material/dialog'
 
 @NgModule({
   declarations: [
@@ -33,12 +37,15 @@ import { LoginComponent } from './components/login/login.component';
     SeleccionEnvioComponent,
     ConfirmarPedidoComponent,
     LoginComponent,
+    SuccesBuysComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     NgxDataTableModule,
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
