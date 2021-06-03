@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-seleccion-pago',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SeleccionPagoComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  continuar(): void {
+    this.router.navigate(['carrito-compra/select-envio'])
+  }
+
+  volver(): void {
+    this.router.navigate(['carrito-compra'])
   }
 
 }

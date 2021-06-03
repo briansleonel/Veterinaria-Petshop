@@ -27,6 +27,7 @@
                     </div>
                 </div>
             </div>
+            
             <div class="row  px-3 px-sm-2 d-flex justify-content-center  m-0">
                 <div class="col-12 col-sm-11 mx-auto bd-callout bd-callout-primary">
                     <div class="col-12 m-0 row">
@@ -35,19 +36,21 @@
                             <input type="text" class="form-control form-control-sm" id="direccion" placeholder="Tu dirección...">
                         </div>
                     </div>
+                    <!--
                     <div class="col-12 m-0 row d-flex justify-content-evenly mt-4 mt-sm-5">
                         <a class="btn btn-success btn-sm col-12 col-sm-3 mb-2 mb-sm-auto">Confirmar domicilio</a>
                         <a class="btn btn-info btn-sm col-12 col-sm-3">Modificar domicilio</a>
                     </div>
+                    -->
                 </div>
             </div>
         </div>
     </div>
     <div class="row bg-dark  text-white p-3 d-flex justify-content-evenly">
-        <a class="btn btn-danger btn-lg col-12 col-sm-4 my-2 my-sm-2" [routerLink]="['select-pago']">
+        <a class="btn btn-danger btn-lg col-12 col-sm-4 my-2 my-sm-2" (click)="volver()">
             Volver
         </a>
-        <a class="btn btn-warning btn-lg col-12 col-sm-4 my-2 my-sm-2" [routerLink]="['detalles']">
+        <a class="btn btn-warning btn-lg col-12 col-sm-4 my-2 my-sm-2" (click)="continuar()">
             Continuar
         </a>
     </div>

@@ -36,10 +36,10 @@
         </div>
     </div>
     <div class="row bg-dark  text-white p-3 d-flex justify-content-evenly">
-        <a class="btn btn-danger btn-lg col-12 col-sm-4 my-2 my-sm-2" [routerLink]="['medio-pago']">
+        <a class="btn btn-danger btn-lg col-12 col-sm-4 my-2 my-sm-2" (click)="volver()">
             Volver
         </a>
-        <a class="btn btn-warning btn-lg col-12 col-sm-4 my-2 my-sm-2" [routerLink]="['select-envio']">
+        <a class="btn btn-warning btn-lg col-12 col-sm-4 my-2 my-sm-2" (click)="continuar()">
             Continuar
         </a>
     </div>

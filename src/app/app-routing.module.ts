@@ -17,8 +17,8 @@ const routes: Routes = [
   {path: 'tienda/product/:id', component: ProductoComponent},
   {path: 'carrito-compra', component: CarritoCompraComponent},
   {path: 'carrito-compra/select-pago', component: SeleccionPagoComponent},
-  {path: 'carrito-compra/select-pago/select-envio', component: SeleccionEnvioComponent},
-  {path: 'carrito-compra/select-pago/select-envio/detalles', component: ConfirmarPedidoComponent},
+  {path: 'carrito-compra/select-envio', component: SeleccionEnvioComponent},
+  {path: 'carrito-compra/detalles', component: ConfirmarPedidoComponent},
   {path: 'productos', component: ProductosComponent},
   {path: 'productos/alta', component: ProductoformComponent}
 ];
