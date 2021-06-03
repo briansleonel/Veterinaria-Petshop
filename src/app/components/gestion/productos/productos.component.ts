@@ -19,7 +19,7 @@ export class ProductosComponent implements OnInit {
   cargarProductos():void{
     this.productos = new Array<Producto>();
     for(let i:number = 0; i<=30 ; i++){
-      let producto = new Producto("Nombre "+i, 1+(2*i),"Proveedor " +i, "Categoria "+i, 100+(2*i), 100-i,new Date());
+      let producto = new Producto("0"+i,"Nombre "+i, 1+(2*i),"Proveedor " +i, "Categoria "+i, 100+(2*i), 100-i,new Date());
       this.productos.push(producto);
     }
   }

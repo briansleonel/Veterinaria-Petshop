@@ -1,14 +1,28 @@
 
 <div class="row mt-3 min-vh-100 ">
     <div class="col-11 mx-auto bg-body">
-        <div class="row text-uppercase bg-dark pt-4 pb-4 text-center">
+        <div class="row text-uppercase bg-dark pt-4 pb-4 text-center align-items-center">
             <div class="col-12 col-md-8">
                 <p class=" fs-2 fw-bold text-white"> gestion de productos</p>
             </div>
             
             <div class="text-center pb-4 col-12 col-md-4">
-                <button class="btn btn-primary btn-lg p-3 fs-5 fw-bold" (click)="agregarProducto()">AGREGAR
-                    PRODUCTO</button>
+                <div class="row">
+                    <div class="col-12">
+                        <button class="btn btn-primary btn-lg p-3 fs-5 fw-bold mb-2" (click)="agregarProducto()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        AGREGAR PRODUCTO</button>
+                    </div>
+                    <div class="col-12">
+                         <button class="btn btn-warning btn-lg p-2 fs-5 fw-bold align-items-center" >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" 
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z">
+                        </path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        Notificaciones</button>
+                    </div>
+                </div>
+                
+               
             </div>
         </div>
         
@@ -100,34 +114,20 @@
                         [mfRowsOnPage]="10">
                         <thead class="table-dark ">
                             <tr class="text-center   ">
-                                <th>
-                                    Nombre
-                                </th>
-                                <th>
-                                    Stock
-                                </th>
-                                <th>
-                                    Proveedor
-                                </th>
-                                <th>
-                                    Categoria
-                                </th>
-                                <th>
-                                    Precio Compra
-                                </th>
-                                <th>
-                                    Precio Venta
-                                </th>
-                                <th>
-                                    Vencimiento
-                                </th>
-                                <th>
-                                    Accion
-                                </th>
+                                <th>Codigo</th>
+                                <th>Nombre</th>
+                                <th>Stock</th>
+                                <th> Proveedor</th>
+                                <th>Categoria</th>
+                                <th>Precio Compra</th>
+                                <th> Precio Venta</th>
+                                <th>Vencimiento</th>
+                                <th>Accion</th>
                             </tr>
                         </thead>
                         <tbody class="text-center">
                             <tr *ngFor="let producto of mf.data">
+                                <td>CP{{producto.codigo}}</td>
                                 <td>{{producto.nombre}}</td>
                                 <td>{{producto.stock}}</td>
                                 <td>{{producto.proveedor}}</td>
