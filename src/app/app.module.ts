@@ -21,6 +21,7 @@ import { SuccesBuysComponent } from './components/utils/succes-buys/succes-buys.
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatDialogModule } from '@angular/material/dialog'
+import { AlifeFileToBase64Module } from 'alife-file-to-base64';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { MatDialogModule } from '@angular/material/dialog'
     FormsModule,
     NgxDataTableModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    AlifeFileToBase64Module
   ],
   providers: [],
   bootstrap: [AppComponent]
