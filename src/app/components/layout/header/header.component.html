@@ -43,6 +43,18 @@
                     </ul>
                 </li>
 
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Gestión
+                        <span class="badge rounded-pill bg-danger">Vencimientos</span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                        <li><a class="dropdown-item" [routerLink]="['productos']">Gestionar productos</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['']">Gestionar usuarios</a></li>
+                        <li><a class="dropdown-item bg-danger text-white" [routerLink]="['proximos-vencimientos']">Próximos vencimientos</a></li>
+                    </ul>
+                </li>
+
                 <li class="nav-item ">
                     <a class="nav-link active" [routerLink]="['productos']">Gestionar productos</a>
                 </li>

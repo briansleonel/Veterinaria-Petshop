@@ -22,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatDialogModule } from '@angular/material/dialog'
 import { AlifeFileToBase64Module } from 'alife-file-to-base64';
+import { ProximosVencimientosComponent } from './components/gestion/proximos-vencimientos/proximos-vencimientos.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { AlifeFileToBase64Module } from 'alife-file-to-base64';
     ConfirmarPedidoComponent,
     LoginComponent,
     SuccesBuysComponent,
+    ProximosVencimientosComponent,
   ],
   imports: [
     BrowserModule,
