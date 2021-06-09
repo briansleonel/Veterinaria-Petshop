@@ -1,7 +1,15 @@
+//dependencias tools
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { AlifeFileToBase64Module } from 'alife-file-to-base64';
+import  { NgxPaginationModule }  from  'ngx-pagination' ; 
+import { MatDialogModule } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SuccesBuysComponent } from './components/utils/succes-buys/succes-buys.component';
+import { NgxDataTableModule } from 'angular-9-datatable';
 
-import { AppRoutingModule } from './app-routing.module';
+//componentes
 import { AppComponent } from './app.component';
 import { FooterComponent } from './components/layout/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
@@ -15,15 +23,11 @@ import { ProductosComponent } from './components/gestion/productos/productos.com
 import { SeleccionPagoComponent } from './components/petshop/seleccion-pago/seleccion-pago.component';
 import { SeleccionEnvioComponent } from './components/petshop/seleccion-envio/seleccion-envio.component';
 import { ConfirmarPedidoComponent } from './components/petshop/confirmar-pedido/confirmar-pedido.component';
-import { NgxDataTableModule } from 'angular-9-datatable';
-import { LoginComponent } from './components/login/login.component';
-import { SuccesBuysComponent } from './components/utils/succes-buys/succes-buys.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { MatDialogModule } from '@angular/material/dialog';
-import { HttpClientModule } from '@angular/common/http';
-import { AlifeFileToBase64Module } from 'alife-file-to-base64';
 import { ProximosVencimientosComponent } from './components/gestion/proximos-vencimientos/proximos-vencimientos.component';
+import { LoginComponent } from './components/login/login.component';
+import { AppRoutingModule } from './app-routing.module';
+
+
 
 @NgModule({
   declarations: [
@@ -51,7 +55,8 @@ import { ProximosVencimientosComponent } from './components/gestion/proximos-ven
     BrowserAnimationsModule,
     MatDialogModule,
     AlifeFileToBase64Module,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

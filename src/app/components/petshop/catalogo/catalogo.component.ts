@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { element } from 'protractor';
 import { Producto } from 'src/app/models/producto/producto';
 import { ProductoService } from 'src/app/services/producto/producto.service';
 
@@ -11,8 +10,10 @@ import { ProductoService } from 'src/app/services/producto/producto.service';
 export class CatalogoComponent implements OnInit {
 
   productos: Array<Producto>;
+  page:number;
   constructor(
-    private productoService: ProductoService
+    private productoService: ProductoService,
+
   ) { }
 
   ngOnInit(): void {
@@ -36,4 +37,5 @@ export class CatalogoComponent implements OnInit {
       }
     )
   }
+
 }
