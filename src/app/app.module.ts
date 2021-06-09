@@ -20,7 +20,8 @@ import { LoginComponent } from './components/login/login.component';
 import { SuccesBuysComponent } from './components/utils/succes-buys/succes-buys.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatDialogModule } from '@angular/material/dialog'
+import { MatDialogModule } from '@angular/material/dialog';
+import { HttpClientModule } from '@angular/common/http';
 import { AlifeFileToBase64Module } from 'alife-file-to-base64';
 import { ProximosVencimientosComponent } from './components/gestion/proximos-vencimientos/proximos-vencimientos.component';
 
@@ -40,7 +41,7 @@ import { ProximosVencimientosComponent } from './components/gestion/proximos-ven
     ConfirmarPedidoComponent,
     LoginComponent,
     SuccesBuysComponent,
-    ProximosVencimientosComponent,
+    ProximosVencimientosComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +50,8 @@ import { ProximosVencimientosComponent } from './components/gestion/proximos-ven
     NgxDataTableModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    AlifeFileToBase64Module
+    AlifeFileToBase64Module,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

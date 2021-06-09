@@ -1,25 +1,20 @@
+import { Categoria } from "../categoria/categoria";
+import { Proveedor } from "../proveedor/proveedor";
+
 export class Producto {
+    _id:string;
     codigo:string;
     nombre:string;
+    descripcion:string;
     stock:number;
-    proveedor:string;
-    categoria:string;
+    proveedor:Proveedor;
+    categoria:Categoria;
     precioCompra:number;
     precioVenta:number;
-    vencimiento:Date;
+    fechaVencimiento:Date;
+    fechaRecepcion:Date;
     img:string;
+   
 
-    constructor(codigo?:string,nombre?:string, stock?:number, proveedor?:string, 
-        categoria?:string, precioCompra?:number, precioVenta?:number, vencimiento?:Date, img?:string){
-            this.codigo = codigo;
-            this.nombre = nombre;
-            this.stock = stock;
-            this.proveedor = proveedor;
-            this.categoria = categoria;
-            this. precioCompra = precioCompra;
-            this.precioVenta = precioVenta;
-            this.vencimiento = vencimiento;
-            this.img=img;
-        }
 
 }

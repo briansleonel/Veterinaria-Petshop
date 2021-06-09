@@ -15,7 +15,6 @@ import { ProximosVencimientosComponent } from './components/gestion/proximos-ven
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'tienda', component: CatalogoComponent},
-  {path: 'tienda/product', component: ProductoComponent},
   {path: 'tienda/product/:id', component: ProductoComponent},
   {path: 'carrito-compra', component: CarritoCompraComponent},
   {path: 'carrito-compra/select-pago', component: SeleccionPagoComponent},

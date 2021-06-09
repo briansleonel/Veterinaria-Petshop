@@ -14,12 +14,12 @@
                         </div>
                         <div class="col-sm-8 col-12">
                             <div class="card-body p-4">
-                                <h2 class="card-title text-center mb-5 fs-2">Nombre producto</h2>
+                                <h2 class="card-title text-center mb-5 fs-2">{{producto.nombre}}</h2>
                                 <p class="card-text fw-light fs-4 mb-4">
-                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque saepe distinctio itaque reiciendis aliquid, voluptatibus error ipsum officia, enim alias harum? Maxime pariatur tenetur quisquam voluptate voluptatem commodi nostrum similique.
+                                    {{producto.descripcion}}
                                 </p>
-                                <p class="card-text fs-2 text-center"><span>$99.99</span></p>
-                                <p class="card-text fs-6 fw-light text-end">Stock disponible: <span>123456</span></p>
+                                <p class="card-text fs-2 text-center"><span>{{producto.precioVenta}}</span></p>
+                                <p class="card-text fs-6 fw-light text-end">Stock disponible: <span>{{producto.stock}}</span></p>
                                 <div class="d-flex justify-content-center mt-5">
                                     <a class="btn btn-primary btn-lg m-0">
                                         Agregar al carrito&nbsp;
