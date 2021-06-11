@@ -38,7 +38,8 @@
                     <a class="nav-link dropdown-toggle active" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Petshop</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                         <li><a class="dropdown-item" [routerLink]="['tienda']">Tienda</a></li>
-                        <li><a class="dropdown-item" [routerLink]="['carrito-compra']">Mi carrito</a></li>
+
+                        <li *ngIf="habilitarCarrito()"><a class="dropdown-item" [routerLink]="['carrito-compra']">Mi carrito</a></li>
                         <li><a class="dropdown-item" [routerLink]="['']">Gestionar productos</a></li>
                     </ul>
                 </li>

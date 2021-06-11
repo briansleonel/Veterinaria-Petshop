@@ -20,24 +20,14 @@
                             </tr>
                         </thead>
                         <tbody class="text-center">
-                            <tr>
+                            <tr *ngFor = "let prod of listaProductos">
                                 <th>1</th>
-                                <td>Titulo producto</td>
-                                <td>Una descripcion</td>
-                                <td>$99.99</td>
+                                <td>{{prod.nombre}}</td>
+                                <td>{{prod.descripcion}}</td>
+                                <td>${{prod.precioVenta}}</td>
                             </tr>
-                            <tr>
-                                <th>2</th>
-                                <td>Titulo producto</td>
-                                <td>Una descripcion</td>
-                                <td>$99.99</td>
-                            </tr>
-                            <tr>
-                                <th>3</th>
-                                <td>Titulo producto</td>
-                                <td>Una descripcion</td>
-                                <td>$99.99</td>
-                            </tr>
+                           
+                            
                         </tbody>
                         <tbody class="text-center">
                             <tr>

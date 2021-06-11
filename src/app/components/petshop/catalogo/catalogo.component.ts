@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Producto } from 'src/app/models/producto/producto';
 import { ProductoService } from 'src/app/services/producto/producto.service';
+import { VentaService } from 'src/app/services/venta/venta.service';
 
 @Component({
   selector: 'app-catalogo',
@@ -18,6 +19,7 @@ export class CatalogoComponent implements OnInit {
 
   constructor(
     private productoService: ProductoService,
+    private ventaService: VentaService
 
   ) { }
 
@@ -36,6 +38,8 @@ export class CatalogoComponent implements OnInit {
         result.forEach(element => {
           let producto = new Producto();
           Object.assign(producto, element);
+          console.log(element);
+          console.log(producto);
           this.productos.push(producto);
         });
         console.log(this.productos)
@@ -73,6 +77,13 @@ export class CatalogoComponent implements OnInit {
     this.filterTypeProducto = '';
     this.filterTypeMascota = '';
     this.cargarCatalogoProductos();
+  }
+
+  addProductToCart(prod:Producto):void{
+    console.log(prod);
+    this.ventaService.listaProductos.push(prod);
+    console.log(this.ventaService.listaProductos[0]);
+    console.log(this.ventaService.listaProductos.length);
   }
 
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Producto } from 'src/app/models/producto/producto';
+import { VentaService } from 'src/app/services/venta/venta.service';
 import { SuccesBuysComponent } from '../../utils/succes-buys/succes-buys.component';
 
 @Component({
@@ -10,12 +12,16 @@ import { SuccesBuysComponent } from '../../utils/succes-buys/succes-buys.compone
 })
 export class ConfirmarPedidoComponent implements OnInit {
 
+  listaProductos: Array<Producto>;
   constructor(
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private ventaService: VentaService
   ) { }
 
   ngOnInit(): void {
+    this.listaProductos = new Array<Producto>();
+    this.listaProductos = this.ventaService.listaProductos;
   }
 
   confirmarPedido(): void {

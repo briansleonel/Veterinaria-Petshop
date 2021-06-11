@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { VentaService } from 'src/app/services/venta/venta.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private ventaService: VentaService
+  ) { }
 
   ngOnInit(): void {
   }
 
+  habilitarCarrito():boolean{
+    if(this.ventaService.listaProductos.length!=0)
+      return true;
+    else
+      return false;
+  }
 }
