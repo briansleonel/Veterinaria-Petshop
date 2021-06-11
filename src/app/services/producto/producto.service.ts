@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Producto } from 'src/app/models/producto/producto';
 
 @Injectable({
   providedIn: 'root'
@@ -21,11 +20,12 @@ export class ProductoService {
     return this.http.get(this.urlBase,options);
   }
 
-  get(nombreProd: string):Observable<any>{
+  get(nombreProd: string, codigoProd: string):Observable<any>{
     const httpOptions = {
       headers: new HttpHeaders(),
       params : {
-        nombre : nombreProd
+        nombre : nombreProd,
+        codigo : codigoProd
       }
     }
 

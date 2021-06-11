@@ -26,23 +26,24 @@
             </form>
             <form class="row my-4 p-0 d-flex justify-content-center g-2">
                 <div class="col-4">
-                    <label for="inputState" class="form-label">Tipo de producto</label>
-                    <select id="inputState" class="form-select form-select-sm">
+                    <label for="filterTypeProducto" class="form-label">Tipo de producto</label>
+                    <select id="filterTypeProducto" name="filterTypeProducto" class="form-select form-select-sm" (ngModelChange) ="filterByTypeProduct($event)" [(ngModel)]="filterTypeProducto">
                         <option value="" selected></option>
-                        <option value="">Juguetes</option>
-                        <option value="">Alimento</option>
-                        <option value="">Accesorios</option>
-                        <option value="">Ropa</option>
+                        <option value="Alimentos">Alimentos</option>
+                        <option value="Accesorios">Accesorios</option>
+                        <option value="Estética e higiene">Estética e higiene</option>
+                        <option value="Salud">Salud</option>
+                        
                     </select>
                 </div>
 
                 <div class="col-4">
-                    <label for="inputState" class="form-label">Mascota</label>
-                    <select id="inputState" class="form-select form-select-sm">
+                    <label for="filterTypeMascota" class="form-label">Mascota</label>
+                    <select id="filterTypeMascota" name="filterTypeMascota" class="form-select form-select-sm" (ngModelChange) ="filterByTypeMascota($event)" [(ngModel)]="filterTypeMascota">
                         <option value="" selected></option>
-                        <option value="">Perros</option>
-                        <option value="">Gatos</option>
-                        <option value="">Otros</option>
+                        <option value="Perro">Perro</option>
+                        <option value="Gato">Gato</option>
+                        <option value="Otros">Otros</option>
                     </select>
                 </div>
             </form>
@@ -54,9 +55,9 @@
             <!-- ************************* Seccion de catalogo ************************* -->
             <!-- *********************************************************************** -->
             <div class="row row-cols-2 row-cols-sm-3 g-1 g-sm-4 m-0 p-0">
-                <div class="col" *ngFor ="let prod of productos | paginate: { itemsPerPage: 4, currentPage: page} ">
+                <div class="col" *ngFor ="let prod of productos | paginate: { itemsPerPage: 9, currentPage: page} ">
                     <div class="card border-light bg-white ">
-                        <img src="{{prod.img}}" class="card-img-top" alt="...">
+                        <img [src]="prod.img" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h4 class="card-title text-center fw-light fs-4">{{prod.nombre}}</h4>
                             

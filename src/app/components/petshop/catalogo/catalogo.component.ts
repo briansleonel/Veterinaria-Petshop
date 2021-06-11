@@ -12,6 +12,9 @@ export class CatalogoComponent implements OnInit {
   productos: Array<Producto>;
   page:number;
   findNameProd : string;
+  findCodigoProd: string;
+  filterTypeProducto: string;
+  filterTypeMascota: string;
 
   constructor(
     private productoService: ProductoService,
@@ -20,12 +23,15 @@ export class CatalogoComponent implements OnInit {
 
   ngOnInit(): void {
     this.findNameProd = '';
+    this.findCodigoProd = '';
+    this.filterTypeProducto = '';
+    this.filterTypeMascota = '';
     this.cargarCatalogoProductos();
   }
 
   cargarCatalogoProductos():void{
     this.productos = new Array<Producto>();
-    this.productoService.get(this.findNameProd).subscribe(
+    this.productoService.get(this.findNameProd, this.findCodigoProd).subscribe(
       result=>{
         result.forEach(element => {
           let producto = new Producto();
@@ -40,8 +46,32 @@ export class CatalogoComponent implements OnInit {
     )
   }
 
+  filterByTypeProduct(event): void {
+    this.filterTypeProducto = event;
+    let encontrados = Array<Producto>();
+    this.productos.forEach(element => {
+      if(element.categoria.tipoProducto == this.filterTypeProducto)
+        encontrados.push(element);
+    })
+    this.productos = encontrados;
+  }
+
+  filterByTypeMascota(event): void {
+    this.filterTypeMascota = event;
+    console.log("Filter:" ,this.filterTypeMascota)
+    let encontrados = Array<Producto>();
+    this.productos.forEach(element => {
+      console.log("Element: ",element.categoria.tipoMascota)
+      if(element.categoria.tipoMascota == this.filterTypeMascota)
+        encontrados.push(element);
+    })
+    this.productos = encontrados;
+  }
+
   cleanFilters(): void {
     this.findNameProd = '';
+    this.filterTypeProducto = '';
+    this.filterTypeMascota = '';
     this.cargarCatalogoProductos();
   }
 
