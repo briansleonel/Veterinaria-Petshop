@@ -1,3 +1,4 @@
+import { Venta } from './../../../models/venta/venta';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -13,6 +14,9 @@ import { SuccesBuysComponent } from '../../utils/succes-buys/succes-buys.compone
 export class ConfirmarPedidoComponent implements OnInit {
 
   listaProductos: Array<Producto>;
+
+  venta: Venta;
+
   constructor(
     private router: Router,
     private dialog: MatDialog,
@@ -20,18 +24,24 @@ export class ConfirmarPedidoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.listaProductos = new Array<Producto>();
-    this.listaProductos = this.ventaService.listaProductos;
+    this.venta = new Venta();
+    this.venta = this.ventaService.venta;
+    //this.listaProductos = new Array<Producto>();
+    //this.listaProductos = this.ventaService.venta.productos;
   }
 
   confirmarPedido(): void {
     const dialogRef = this.dialog.open(SuccesBuysComponent, {data: ''});
     dialogRef.afterClosed().subscribe(
       (res) => {
-        if(res)
-          console.log("Descargar comprobante ", res)
+        if(res) {
+          console.log("Descargar comprobante ", res);
+        }
+        this.router.navigate(['tienda'])
       }
     )
+    this.ventaService.addVenta(this.venta);
+    this.ventaService.init();
   }
 
   volver(): void {

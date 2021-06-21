@@ -55,7 +55,7 @@
             <!-- ************************* Seccion de catalogo ************************* -->
             <!-- *********************************************************************** -->
             <div class="row row-cols-2 row-cols-sm-3 g-1 g-sm-4 m-0 p-0">
-                <div class="col" *ngFor ="let prod of productos | paginate: { itemsPerPage: 3, currentPage: page} ">
+                <div class="col" *ngFor ="let prod of productos | paginate: { itemsPerPage: 9, currentPage: page} ">
                     <div class="card border-light bg-white ">
                         <img [src]="prod.img" class="card-img-top" alt="...">
                         <div class="card-body">

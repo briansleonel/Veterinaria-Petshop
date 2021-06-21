@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
   }
 
   habilitarCarrito():boolean{
-    if(this.ventaService.listaProductos.length!=0)
+    if(this.ventaService.venta.productos.length!=0)
       return true;
     else
       return false;

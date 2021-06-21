@@ -20,7 +20,7 @@
                             </tr>
                         </thead>
                         <tbody class="text-center">
-                            <tr *ngFor = "let prod of listaProductos">
+                            <tr *ngFor = "let prod of venta.productos">
                                 <th>1</th>
                                 <td>{{prod.nombre}}</td>
                                 <td>{{prod.descripcion}}</td>
@@ -32,15 +32,21 @@
                         <tbody class="text-center">
                             <tr>
                                 <th scope="row" colspan="2" class="text-end">Forma de envío:</th>
-                                <td>Envío a domicilio</td>
-                                <td>$99.99</td>
+                                <td> {{venta.medioEnvio}} </td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                        <tbody class="text-center">
+                            <tr>
+                                <th scope="row" colspan="2" class="text-end">Medio de pago:</th>
+                                <td > {{venta.pago.formaPago}} </td>
+                                <td></td>
                             </tr>
                         </tbody>
                         <tfoot class="text-center">
                             <tr>
-                                <th scope="row" colspan="2" class="text-end">Medio de pago:</th>
-                                <td>Tarjeta de crédito</td>
-                                <td>Total: <span class="fw-bold">$99.99</span></td>
+                                <th scope="row" colspan="3" class="text-end">Total</th>
+                                <td>{{venta.pago.precioTotal | currency}} </td>
                             </tr>
                         </tfoot>
                     </table>

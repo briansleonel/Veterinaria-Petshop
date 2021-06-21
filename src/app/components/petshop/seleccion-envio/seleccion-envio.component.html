@@ -11,7 +11,7 @@
             <div class="row  px-3 px-sm-2 d-flex justify-content-evenly  m-0">
                 <div class="col-12 col-sm-5 mx-auto bd-callout bd-callout-primary">
                     <div class="form-check m-0">
-                        <input class="form-check-input" type="radio" name="formaEnvio" id="retiroSucursal">
+                        <input class="form-check-input" type="radio" name="formaEnvio" id="retiroSucursal" value="Retiro en sucursal" [(ngModel)]="modoEnvio">
                         <label class="form-check-label" for="retiroSucursal">
                             Retiro en sucursal
                         </label>
@@ -20,7 +20,7 @@
 
                 <div class="col-12 col-sm-5 mx-auto bd-callout bd-callout-primary">
                     <div class="form-check m-0">
-                        <input class="form-check-input" type="radio" name="formaEnvio" id="envioDomicilio">
+                        <input class="form-check-input" type="radio" name="formaEnvio" id="envioDomicilio" value="Envío a domicilio" [(ngModel)]="modoEnvio">
                         <label class="form-check-label" for="envioDomicilio">
                             Envío a domicilio
                         </label>

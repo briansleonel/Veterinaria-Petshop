@@ -5,11 +5,11 @@
         </div>
     </div>
     <div class="row">
-        <div class="container col-12 p-0 py-sm-5 px-sm-3 my-sm-0 m-0">
+        <form class="container col-12 p-0 py-sm-5 px-sm-3 my-sm-0 m-0">
             <div class="row  px-3 px-sm-2 d-flex justify-content-evenly  m-0">
                 <div class="col-12 col-sm-3 bd-callout bd-callout-primary">
                     <div class="form-check m-0">
-                        <input class="form-check-input" type="radio" name="medioPago" id="efectivo">
+                        <input class="form-check-input" type="radio" name="medioPago" id="efectivo" value="Efectivo" [(ngModel)]="pago.formaPago">
                         <label class="form-check-label" for="efectivo">
                             Efectivo al retirar
                         </label>
@@ -18,7 +18,7 @@
 
                 <div class="col-12 col-sm-3 bd-callout bd-callout-primary">
                     <div class="form-check m-0">
-                        <input class="form-check-input" type="radio" name="medioPago" id="tarjetaDebito">
+                        <input class="form-check-input" type="radio" name="medioPago" id="tarjetaDebito" value="Tarjeta de débito" [(ngModel)]="pago.formaPago">
                         <label class="form-check-label" for="tarjetaDebito">
                             Tarjeta de débito
                         </label>
@@ -26,7 +26,7 @@
                 </div>
                 <div class="col-12 col-sm-3 bd-callout bd-callout-primary">
                     <div class="form-check m-0">
-                        <input class="form-check-input" type="radio" name="medioPago" id="tarjetaCredito">
+                        <input class="form-check-input" type="radio" name="medioPago" id="tarjetaCredito" value="Tarjeta de crédito" [(ngModel)]="pago.formaPago">
                         <label class="form-check-label" for="tarjetaCredito">
                             Tarjeta de crédito
                         </label>
@@ -72,7 +72,7 @@
                     -->
                 </div>
             </div>
-        </div>
+        </form>
     </div>
     <div class="row bg-dark  text-white p-3 d-flex justify-content-evenly">
         <a class="btn btn-danger btn-lg col-12 col-sm-4 my-2 my-sm-2" (click)="volver()">

@@ -80,10 +80,11 @@ export class CatalogoComponent implements OnInit {
   }
 
   addProductToCart(prod:Producto):void{
-    console.log(prod);
-    this.ventaService.listaProductos.push(prod);
-    console.log(this.ventaService.listaProductos[0]);
-    console.log(this.ventaService.listaProductos.length);
+    //console.log(prod);
+    //this.ventaService.listaProductos.push(prod);
+    this.ventaService.venta.productos.push(prod);
+    //console.log(this.ventaService.listaProductos[0]);
+    console.log(this.ventaService.venta.productos.length);
   }
 
 }

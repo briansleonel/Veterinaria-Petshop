@@ -45,7 +45,7 @@ import { AppRoutingModule } from './app-routing.module';
     ConfirmarPedidoComponent,
     LoginComponent,
     SuccesBuysComponent,
-    ProximosVencimientosComponent
+    ProximosVencimientosComponent,
   ],
   imports: [
     BrowserModule,

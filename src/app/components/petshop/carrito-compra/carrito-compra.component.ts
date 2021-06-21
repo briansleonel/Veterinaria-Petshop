@@ -19,8 +19,8 @@ export class CarritoCompraComponent implements OnInit {
 
   ngOnInit(): void {
     this.listaProductos = new Array<Producto>();
-    console.log(this.ventaService.listaProductos[0]);
-    this.listaProductos = this.ventaService.listaProductos;
+    //console.log(this.ventaService.listaProductos[0]);
+    this.listaProductos = this.ventaService.venta.productos;
     this.precioTotal = 0;
     this.calcularPrecio();
   }
@@ -38,7 +38,7 @@ export class CarritoCompraComponent implements OnInit {
 
   deleteProduct(prod:Producto):void{
     this.listaProductos = this.listaProductos.filter(producto => producto != prod);
-    this.ventaService.listaProductos = this.listaProductos;
+    this.ventaService.venta.productos = this.listaProductos;
     this.precioTotal = 0;
     this.calcularPrecio();
   }
