@@ -42,20 +42,17 @@ export class ProductosComponent implements OnInit {
     this.proveedores = new Array<Proveedor>();
     this.cargarProductos();
     this.cargarProveedores();
-    console.log(this.productos)
   }
 
   cargarProveedores(): void {
     this.proveedores = new Array<Proveedor>();
     this.proveedorService.get(this.filterTypeProveedor).subscribe(
       result=>{
-        console.log(result);
         result.forEach(element => {
           let proveedor = new Proveedor();
           Object.assign(proveedor, element);
           this.proveedores.push(proveedor);
         });
-        console.log(this.proveedores)
       },
       error=>{
         console.log(error);
