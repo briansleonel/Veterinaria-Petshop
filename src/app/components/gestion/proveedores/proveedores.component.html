@@ -1,0 +1,114 @@
+<div class="container rounded my-5">
+    <div class="row bg-dark justify-content-center  p-3">
+        <div class="col-12 mb-4  border-bottom border-4">
+            <h1 class="text-center fs-1 text-white  fw-bold my-5">PROVEEDORES</h1>
+        </div>
+        <div class=" col-12  col-lg-8 fs-6">
+
+            <div class="bg-alta-prod p-2 rounded">
+                <form >
+                    <div class="col-md-10 form-floating m-auto mb-3">
+                        <input type="text" class="form-control" id="nombre" placeholder="" name="nombre" [(ngModel)]="proveedor.nombre">
+                        <label for="nombre">Nombre</label>
+                    </div>
+                    <div class="col-md-10 form-floating m-auto mb-3">
+                        <input type="text" class="form-control" id="direccion" placeholder="" name="direccion" [(ngModel)]="proveedor.direccion">
+                        <label for="direccion">Direccion</label>
+                    </div>
+                    <div class="col-md-10 form-floating m-auto mb-3">
+                        <input type="text" class="form-control" id="telefono" placeholder="" name="telefono" [(ngModel)]="proveedor.telefono">
+                        <label for="telefono">Teléfono</label>
+                    </div>
+
+                    <div class="col-md-10 form-floating m-auto mb-3">
+                        <input type="email" class="form-control" id="email" placeholder="" name="email" [(ngModel)]="proveedor.email">
+                        <label for="email">E-mail</label>
+                    </div>
+                </form>
+            </div>
+
+            <div class="text-center pb-4 mt-3">
+                <button *ngIf="editar == false" type="button" class=" col-12 col-sm-5 col-lg-3 btn btn-primary btn-lg p-1 fs-4 me-2 fw-bold" (click)="guardarProveedor()">GUARDAR</button>
+                <button *ngIf="editar == true" type="button" class=" col-12 col-sm-5 col-lg-3 btn btn-primary btn-lg p-1 fs-4 me-2 fw-bold" (click)="actualizarProveedor()">ACTUALIZAR</button>
+                <button *ngIf="editar == true" type="button" class=" col-12 col-sm-5 col-lg-3 btn btn-danger btn-lg p-1 fs-4 fw-bold" (click)="cancelar()">CANCELAR</button>
+            </div>
+
+            <div class="p-md-4">
+                <div class="row row-cols-auto justify-content-around filtros pt-3 pb-3">
+                    <div class="col-12 mb-2">
+                        <form class="row p-0 d-flex justify-content-center g-2 ">
+                            <div class="col-12 col-md-6">
+                                <input [(ngModel)]="proveedorSeleccionado" name="nombreCodigo" type="text" class="form-control fs-5 " placeholder="Ingrese Nombre del proveedor...">
+                            </div>
+                            <div class="col-10 col-sm-4 col-md-3 ">
+                                <button (click)="buscarProveedor()" type="button" class="btn btn-primary w-100 m-auto">
+                                    Buscar
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                            <div class="col-10 col-sm-4 col-md-2">
+                                <button (click)="cargarProveedores()" type="button" class="btn btn-success w-100 m-auto">
+                                    Limpiar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                </div>
+
+
+        </div>
+    </div>
+    <div class="col-12 ">
+        <div class="p-md-2 mt-1 table-responsive min-vh-100">
+            <table class="table align-middle " [mfData]="proveedores" #mf="mfDataTable"
+                [mfRowsOnPage]="10">
+                <thead class="table-dark ">
+                    <tr class="text-center   ">
+                        <th>Nombre</th>
+                        <th>Dirección</th>
+                        <th>Teléfono</th>
+                        <th>E-mail</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center text-white">
+                    <tr *ngFor="let proveedor of mf.data">
+                        <td>{{proveedor.nombre}}</td>
+                        <td>{{proveedor.direccion}}</td>
+                        <td>{{proveedor.telefono}}</td>
+                        <td>{{proveedor.email}}</td>
+                        <td>
+                            
+                            <button class="btn btn-success " data-bs-toggle="tooltip" data-bs-placement="bottom"
+                            title="Modificar Registro" (click)="modificarProveedor(proveedor)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path>
+                                <polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon>
+                            </svg>
+                            </button>
+                            <button class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                title="Eliminar Registro" (click)="confirmDelete(proveedor)">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" fill="currentColor"
+                                    class="bi bi-trash" viewBox="0 0 16 16">
+                                    <path
+                                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                    <path fill-rule="evenodd"
+                                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                                </svg>
+                            </button>
+                           
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4">
+                            <mfBootstrapPaginator [rowsOnPageSet]="[10,20,25]"></mfBootstrapPaginator>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

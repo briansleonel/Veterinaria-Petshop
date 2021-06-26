@@ -27,9 +27,9 @@ import { ProximosVencimientosComponent } from './components/gestion/proximos-ven
 import { LoginComponent } from './components/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ToastrModule } from 'ngx-toastr';
-import { ProveedoresComponent } from './components/gestion/proveedores/proveedores/proveedores.component';
-import { CategoriasComponent } from './components/gestion/categorias/categorias/categorias.component';
-import { ProductoformComponent } from './components/gestion/productoform/productoform/productoform.component';
+import { ProveedoresComponent } from './components/gestion/proveedores/proveedores.component';
+import { CategoriasComponent } from './components/gestion/categorias/categorias.component';
+import { ProductoformComponent } from './components/gestion/productoform/productoform.component';
 import { ConfirmDialogComponent } from './components/utils/confirm-dialog/confirm-dialog.component';
 
 

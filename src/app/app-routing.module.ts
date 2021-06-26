@@ -7,10 +7,12 @@ import { ConfirmarPedidoComponent } from './components/petshop/confirmar-pedido/
 import { ProductoComponent } from './components/petshop/producto/producto.component';
 import { SeleccionEnvioComponent } from './components/petshop/seleccion-envio/seleccion-envio.component';
 import { SeleccionPagoComponent } from './components/petshop/seleccion-pago/seleccion-pago.component';
-import { ProductoformComponent } from './components/gestion/productoform/productoform/productoform.component';
+import { ProductoformComponent } from './components/gestion/productoform/productoform.component';
 import { ProductosComponent } from './components/gestion/productos/productos.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProximosVencimientosComponent } from './components/gestion/proximos-vencimientos/proximos-vencimientos.component';
+import { ProveedoresComponent } from './components/gestion/proveedores/proveedores.component';
+import { CategoriasComponent } from './components/gestion/categorias/categorias.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -23,7 +25,9 @@ const routes: Routes = [
   {path: 'productos', component: ProductosComponent},
   {path: 'form-producto/:id', component: ProductoformComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'proximos-vencimientos', component: ProximosVencimientosComponent}
+  {path: 'proximos-vencimientos', component: ProximosVencimientosComponent},
+  {path: 'categorias', component: CategoriasComponent},
+  {path: 'proveedores', component: ProveedoresComponent},
 ];
 
 @NgModule({
