@@ -21,7 +21,7 @@ const routes: Routes = [
   {path: 'carrito-compra/select-envio', component: SeleccionEnvioComponent},
   {path: 'carrito-compra/detalles', component: ConfirmarPedidoComponent},
   {path: 'productos', component: ProductosComponent},
-  {path: 'productos/alta', component: ProductoformComponent},
+  {path: 'form-producto/:id', component: ProductoformComponent},
   {path: 'login', component: LoginComponent},
   {path: 'proximos-vencimientos', component: ProximosVencimientosComponent}
 ];

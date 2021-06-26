@@ -3,11 +3,11 @@
     <div class="col-11 mx-auto bg-body">
         <div class="row text-uppercase bg-dark py-5 text-center align-items-center">
             <div class="col-12 col-md-8">
-                <p class=" fs-2 fw-bold text-white m-0"> gestion de productos</p>
+                <p class=" fs-2 fw-bold text-white m-0"> gestión de productos</p>
             </div>
             <div class="text-center col-12 col-md-4 p-0 m-0">
-                <button class="btn btn-primary btn-lg p-3 fs-5 fw-bold m-0" (click)="agregarProducto()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                <button class="btn btn-primary btn-lg p-3 fs-5 fw-bold m-0 mt-4 mt-md-0 me-md-3" (click)="agregarProducto()">
+                    <i class="bi bi-plus-lg"></i>
                         AGREGAR PRODUCTO
                 </button>
             </div>
@@ -85,7 +85,7 @@
                             </div>
                             <div class="col-12 col-sm-4 col-md-2 " (click)="cleanFilters()">
                                 <button type="button" class="btn btn-success  btn-lg w-100 m-auto">
-                                    Limpiar filtros
+                                    Limpiar
                                 </button>
                             </div>
                         </form>
@@ -117,31 +117,16 @@
                                 <td>{{producto.stock}}</td>
                                 <td>{{producto.proveedor.nombre}}</td>
                                 <td>{{producto.categoria.tipoMascota}} - {{producto.categoria.tipoProducto}}</td>
-                                <td>$ {{producto.precioCompra}}</td>
-                                <td>$ {{producto.precioVenta}}</td>
-                                <td>{{producto.fechaVencimiento | date : longDate }}</td>
+                                <td>{{producto.precioCompra | currency:'$'}}</td>
+                                <td>{{producto.precioVenta}}</td>
+                                <td>{{producto.fechaVencimiento | date : 'dd/MM/yyyy' }}</td>
                                 <td>
-                                    <button class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                        title="Ver Detalles">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z">
-                                            </path>
-                                            <circle cx="12" cy="12" r="3"></circle>
-                                        </svg>
-                                    </button>
-                                    <button class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                        title="Eliminar Registro">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" fill="currentColor"
-                                            class="bi bi-trash" viewBox="0 0 16 16">
-                                            <path
-                                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                                            <path fill-rule="evenodd"
-                                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-                                        </svg>
-                                    </button>
-                                   
+                                    <button (click)="modificarProducto(producto)" type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                            title="Editar"><i class="bi bi-pencil"></i>
+                                    </button>  
+                                    <button (click)="confirmDelete(producto)" type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                            title="Eliminar"><i class="bi bi-trash"></i>
+                                    </button>  
                                 </td>
                             </tr>
                         </tbody>

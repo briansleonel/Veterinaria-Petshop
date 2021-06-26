@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Producto } from 'src/app/models/producto/producto';
 
 @Injectable({
   providedIn: 'root'
@@ -38,5 +39,51 @@ export class ProductoService {
       params: new HttpParams({})
     }
     return this.http.get(this.urlBase+id, options);
+  }
+
+  addProducto(producto:Producto):Observable<any>{
+
+    let option = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      }),
+      params: new HttpParams({
+      })
+    }
+    let body = JSON.stringify(producto);
+    return this.http.post(this.urlBase, body, option);
+
+  }
+
+  updateProducto(producto:Producto):Observable<any>{
+    let option = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      }),
+      params: new HttpParams({
+
+      })
+    }
+    let body = JSON.stringify(producto);
+    return this.http.put(this.urlBase+producto._id, body, option);
+  }
+
+  deleteProducto(producto:Producto):Observable<any>{
+    let option = {
+      headers: new HttpHeaders({
+      }),
+      params: new HttpParams({
+      })
+    }
+    return this.http.delete(this.urlBase+producto._id, option);
+  }
+
+  validarCodigo(codigo: string): Observable<any> {
+    let options = {
+      headers: new HttpHeaders({}),
+      params: {
+      }
+    }
+    return this.http.get(this.urlBase + "validar/" + codigo, options);
   }
 }

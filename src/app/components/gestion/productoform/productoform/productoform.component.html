@@ -8,67 +8,80 @@
             <div class="bg-alta-prod p-2 rounded">
                 <form action="">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="nombre" placeholder="">
+                        <input type="text" class="form-control" id="prodCodigo" placeholder="" name="codigo"
+                        [(ngModel)]="producto.codigo" (ngModelChange)="validarCodigo(codigo)" #codigo = "ngModel">
+                        <label for="prodCodigo">Código</label>
+                        <div *ngIf="codigoValido == false" class=" m-0 p-0 alert alert-danger align-items-center">
+                            <p  class="mx-4" >El código ya esta registrado</p>
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="nombre" placeholder="" name="nombre"
+                        [(ngModel)]="producto.nombre">
                         <label for="nombre">Nombre de producto</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="prodCodigo" placeholder="">
-                        <label for="prodCodigo">Codigo</label>
-                    </div>
-                    <div class="form-floating mb-3">
                         <textarea class="form-control" placeholder="" id="prodDescripcion"
-                            style="height: 100px"></textarea>
-                        <label for="prodDescripcion">Descripcion</label>
+                            style="height: 100px" name="descripcion" [(ngModel)]="producto.descripcion"></textarea>
+                        <label for="prodDescripcion">Descripción</label>
                     </div>
                     <div class="row row-cols-1 row-cols-md-2">
                         <div class="col form-floating mb-3">
-                            <input type="number" class="form-control" id="prodPrecio" placeholder="">
+                            <input type="number" class="form-control" id="prodPrecio" placeholder=""
+                            name="precioCompra" [(ngModel)]="producto.precioCompra">
                             <label for="prodPrecio">Precio de Compra</label>
                         </div>
                         <div class=" col form-floating mb-3">
-                            <input type="number" class="form-control" id="prodVenta" placeholder="">
+                            <input type="number" class="form-control" id="prodVenta" placeholder=""
+                            name="precioVenta" [(ngModel)]="producto.precioVenta">
                             <label for="prodVenta">Precio de Venta</label>
                         </div>
+                    </div>
+                    <div class="row row-cols-1 row-cols-md-2" *ngIf="accion=='new'">
                         <div class=" col form-floating mb-3">
                             <input type="date" class="form-control" id="prodRecepcion" placeholder=""
-                                style="height: 80px">
+                                style="height: 80px" name="fechaRecepcion" [(ngModel)]="producto.fechaRecepcion">
                             <label for="prodRecepcion">Fecha De Recepcion</label>
                         </div>
                         <div class=" col form-floating mb-3">
                             <input type="date" class="form-control" id="prodVencimiento" placeholder=""
-                                style="height: 80px">
+                                style="height: 80px" name="fechaVencimiento" [(ngModel)]="producto.fechaVencimiento">
                             <label for="prodVencimiento">Fecha de Vencimiento</label>
                         </div>
                     </div>
+                    
 
                     <div class="form-floating mb-3">
-                        <input type="number" class="form-control" id="prodStock" placeholder="">
+                        <input type="number" class="form-control" id="prodStock" placeholder=""
+                        name="stock" [(ngModel)]="producto.stock">
                         <label for="prodStock">Stock</label>
                     </div>
 
                     <div class="form-floating mb-3">
-                        <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                            <option selected>Open this select menu</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                        <select name="proveedor" [(ngModel)]="producto.proveedor" class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                            <option *ngFor="let proveedor of proveedores" [ngValue]="proveedor">{{proveedor.nombre}}</option>
                         </select>
                         <label for="floatingSelect">Proveedor</label>
                     </div>
-                    <div class="form-floating mb-3">
-                        <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                            <option selected>Open this select menu</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
-                        <label for="floatingSelect">Categoria</label>
+                    <div class="row">
+                        <div class="col-12 col-sm-6 form-floating mb-3">
+                            <select [(ngModel)]="categoriaFinal.tipoProducto" class="form-select" name="categoria" id="floatingSelect" aria-label="Floating label select example">
+                                <option *ngFor="let tipoProducto of tiposProductos" [ngValue]="tipoProducto">{{tipoProducto}}</option>
+                            </select>
+                            <label for="floatingSelect">Categoría</label>
+                        </div>
+                        <div class="col-12 col-sm-6 form-floating mb-3">
+                            <select [(ngModel)]="categoriaFinal.tipoMascota" class="form-select" name="categoria" id="floatingSelect" aria-label="Floating label select example">
+                                <option *ngFor="let tipoMascota of tiposMascota" [ngValue]="tipoMascota">{{tipoMascota}}</option>
+                            </select>
+                            <label for="floatingSelect">Tipo de Mascota</label>
+                        </div>
                     </div>
 
                     <div class="mb-3 bg-body rounded-3 p-4">
-                        <h4 style="color: rgb(153, 155, 157);">Imagen de Producto</h4>
-                        <input type="file" id="file64" class="" alife-file-to-base64 multiple
-                            (onFileChanged)="onFileChanges($event)" accept="image/x-png,image/gif,image/jpeg" />
+                        <h5 style="color: rgb(153, 155, 157);">Imagen de Producto</h5>
+                        <input id="imagen" name="imagen" type="file" alife-file-to-base64 multiple class="form-control" 
+                        required (onFileChanged)="onFileChanges($event)"/>
                         <div>
                             <img *ngIf="producto.img !=''" [src]="producto.img" width="60%" class="mt-3" 
                                 alt="Debe cargar una imagen">
@@ -76,15 +89,19 @@
                     </div>
                 </form>
             </div>
-
-            <div class="text-center pb-4 mt-4">
-                <button class=" col-12 col-sm-10 col-lg-6 btn btn-primary btn-lg p-3 fs-4 fw-bold">GUARDAR
-                    PRODUCTO</button>
+            <div class="row row-cols-1 row-cols-sm-2 mt-3">
+                <div *ngIf="accion == 'new'" class="text-center pb-4">
+                    <button type="button" class=" col-12 col-sm-10 col-lg-8 btn btn-primary btn-lg p-3 fs-4 fw-bold" (click)="guardarProducto()">GUARDAR
+                        </button>
+                </div>
+                <div  *ngIf="accion == 'update'" class="text-center pb-4">
+                    <button type="button" class=" col-12 col-sm-10 col-lg-8 btn btn-primary btn-lg p-3 fs-4 fw-bold" (click)="modificarProducto()">ACTUALIZAR
+                        </button>
+                </div>
+                <div class="text-center pb-4">
+                    <button type="button" class=" col-12 col-sm-10 col-lg-8 btn btn-danger btn-lg p-3 fs-4 fw-bold" (click)="cancelar()">CANCELAR</button>
+                </div>
             </div>
-            <div class="text-center pb-4">
-                <button class=" col-12 col-sm-10 col-lg-6 btn btn-danger btn-lg p-3 fs-4 fw-bold">CANCELAR</button>
-            </div>
-
         </div>
     </div>
 </div>

@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Producto } from 'src/app/models/producto/producto';
 import { Proveedor } from 'src/app/models/proveedor/proveedor';
 import { ProductoService } from 'src/app/services/producto/producto.service';
 import { ProveedorService } from 'src/app/services/proveedor/proveedor.service';
+import { ConfirmDialogComponent } from '../../utils/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-productos',
@@ -22,11 +25,12 @@ export class ProductosComponent implements OnInit {
 
   proveedores: Array<Proveedor>;
 
-  constructor(
-    private router:Router,
-    private productoService: ProductoService,
-    private proveedorService: ProveedorService
-  ) { }
+  constructor(private router:Router,
+              private productoService: ProductoService,
+              private proveedorService: ProveedorService,
+              private dialog: MatDialog,
+              private toastr: ToastrService,
+            ) { }
 
   ngOnInit(): void {
     this.findNameProd = '';
@@ -130,7 +134,37 @@ export class ProductosComponent implements OnInit {
   }
 
   agregarProducto():void{
-    this.router.navigate(["productos/alta"]);
+    this.router.navigate(["form-producto/", 0]);
   }
 
+  modificarProducto(producto: Producto){
+    this.router.navigate(["form-producto/", producto._id ]);
+  }
+
+  confirmDelete(producto: Producto){
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: "¿Seguro que desea eliminar?",
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) 
+        this.borrarProducto(producto);
+    });
+  }
+
+  borrarProducto(producto:Producto){
+    this.productoService.deleteProducto(producto).subscribe(
+      result=>{
+        if (result.status == '1' ){
+          this.toastr.success("El producto fue eliminado correctamente", "OPERACION EXITOSA");
+          this.cargarProductos();
+        }
+        else{
+          this.toastr.error("Error al eliminar el producto", "OPERACION FALLIDA");
+        }
+      },
+      error=>{
+        console.log(error);
+      }
+    )
+  }
 }

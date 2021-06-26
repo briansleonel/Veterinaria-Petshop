@@ -26,6 +26,11 @@ import { ConfirmarPedidoComponent } from './components/petshop/confirmar-pedido/
 import { ProximosVencimientosComponent } from './components/gestion/proximos-vencimientos/proximos-vencimientos.component';
 import { LoginComponent } from './components/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ToastrModule } from 'ngx-toastr';
+import { ProveedoresComponent } from './components/gestion/proveedores/proveedores/proveedores.component';
+import { CategoriasComponent } from './components/gestion/categorias/categorias/categorias.component';
+import { ProductoformComponent } from './components/gestion/productoform/productoform/productoform.component';
+import { ConfirmDialogComponent } from './components/utils/confirm-dialog/confirm-dialog.component';
 
 
 
@@ -46,6 +51,10 @@ import { AppRoutingModule } from './app-routing.module';
     LoginComponent,
     SuccesBuysComponent,
     ProximosVencimientosComponent,
+    ProveedoresComponent,
+    CategoriasComponent,
+    ProductoformComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +65,8 @@ import { AppRoutingModule } from './app-routing.module';
     MatDialogModule,
     AlifeFileToBase64Module,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    ToastrModule.forRoot(), 
   ],
   providers: [],
   bootstrap: [AppComponent]
