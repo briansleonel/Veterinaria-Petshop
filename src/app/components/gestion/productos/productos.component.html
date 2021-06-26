@@ -118,7 +118,7 @@
                                 <td>{{producto.proveedor.nombre}}</td>
                                 <td>{{producto.categoria.tipoMascota}} - {{producto.categoria.tipoProducto}}</td>
                                 <td>{{producto.precioCompra | currency:'$'}}</td>
-                                <td>{{producto.precioVenta}}</td>
+                                <td>{{producto.precioVenta | currency:'$'}}</td>
                                 <td>{{producto.fechaVencimiento | date : 'dd/MM/yyyy' }}</td>
                                 <td>
                                     <button (click)="modificarProducto(producto)" type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="bottom"

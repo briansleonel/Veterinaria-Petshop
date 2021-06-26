@@ -119,7 +119,6 @@ export class ProductoformComponent implements OnInit {
   guardarProducto(){
     this.buscarCategoria();
     this.producto.categoria = this.categoriaFinal;
-    console.log(this.producto)
     this.productoService.addProducto(this.producto).subscribe(
       result=>{
         if(result.status=="1"){

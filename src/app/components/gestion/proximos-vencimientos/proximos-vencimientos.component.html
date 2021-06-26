@@ -6,68 +6,67 @@
                 <p class="text-center fs-2 fw-bold text-white mb-0">Próximos vencimientos</p>
             </div>
         </div>
-            <div class="col-12 p-3">
-                <div class="p-md-2 mt-1 table-responsive min-vh-100">
-                    <table class="table table-striped align-middle " [mfData]="productos" #mf="mfDataTable"
-                        [mfRowsOnPage]="10">
-                        <thead class="table-dark ">
-                            <tr class="text-center   ">
-                                <th>Codigo</th>
-                                <th>Nombre</th>
-                                <th>Stock</th>
-                                <th> Proveedor</th>
-                                <th>Categoria</th>
-                                <th>Precio Compra</th>
-                                <th> Precio Venta</th>
-                                <th>Vencimiento</th>
-                                <th>Accion</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-center">
-                            <tr *ngFor="let producto of mf.data">
-                                <td>CP{{producto.codigo}}</td>
-                                <td>{{producto.nombre}}</td>
-                                <td>{{producto.stock}}</td>
-                                <td>{{producto.proveedor}}</td>
-                                <td>{{producto.categoria}}</td>
-                                <td>$ {{producto.precioCompra}}</td>
-                                <td>$ {{producto.precioVenta}}</td>
-                                <td>{{producto.vencimiento | date :'longDate'}}</td>
-                                <td>
-                                    <button class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                        title="Ver Detalles">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z">
-                                            </path>
-                                            <circle cx="12" cy="12" r="3"></circle>
-                                        </svg>
-                                    </button>
-                                    <button class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                        title="Eliminar Registro">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" fill="currentColor"
-                                            class="bi bi-trash" viewBox="0 0 16 16">
-                                            <path
-                                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                                            <path fill-rule="evenodd"
-                                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-                                        </svg>
-                                    </button>
-                                   
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr class=" w-100">
-                                <td colspan="9" class="m-auto">
-                                    <mfBootstrapPaginator [rowsOnPageSet]="[10,20,25]" class="d-flex justify-content-center"></mfBootstrapPaginator>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
+        <div class="col-8 p-md-4 m-auto">
+            <div class="row row-cols-auto justify-content-around filtros pt-3 pb-3">
+                <div class="col-12 mb-2">
+                    <h4>Próximos a vencer en:</h4>
+                    <form class="row p-0 d-flex justify-content-center g-2 ">
+                        <div class="col-12 col-md-6">
+                            <input #filtro = "ngModel" [(ngModel)]="cantidadDias" name="cantidadDias" type="number" class="form-control fs-5 " placeholder="Cantidad de días">
+                        </div>
+                        <div class="col-10 col-sm-4 col-md-3 ">
+                            <button (click)="cargarProductosPorDias()" type="button" class="btn btn-primary w-100 m-auto">
+                                Buscar
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                        <div class="col-10 col-sm-4 col-md-3">
+                            <button (click)="limpiarFiltro(filtro)" type="button" class="btn btn-success w-100 m-auto">
+                                Limpiar
+                            </button>
+                        </div>
+                    </form>
                 </div>
-
+                
+            </div>
+    </div>
+        <div class="col-12 ">
+            <div class="p-md-2 mt-1 table-responsive min-vh-100">
+                <table class="table table-striped align-middle " [mfData]="productos" #mf="mfDataTable"
+                    [mfRowsOnPage]="10">
+                    <thead class="table-dark ">
+                        <tr class="text-center   ">
+                            <th>Codigo</th>
+                            <th>Nombre</th>
+                            <th>Stock</th>
+                            <th> Proveedor</th>
+                            <th>Categoria</th>
+                            <th>Precio Compra</th>
+                            <th> Precio Venta</th>
+                            <th>Vencimiento</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <tr *ngFor="let producto of mf.data">
+                            <td>CP{{producto.codigo}}</td>
+                            <td>{{producto.nombre}}</td>
+                            <td>{{producto.stock}}</td>
+                            <td>{{producto.proveedor.nombre}}</td>
+                            <td>{{producto.categoria.tipoMascota}} - {{producto.categoria.tipoProducto}}</td>
+                            <td>{{producto.precioCompra | currency:'$'}}</td>
+                            <td>{{producto.precioVenta | currency:'$'}}</td>
+                            <td>{{producto.fechaVencimiento | date : 'dd/MM/yyyy' }}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4">
+                                <mfBootstrapPaginator [rowsOnPageSet]="[10,20,25]"></mfBootstrapPaginator>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
         </div>
     </div>
    
