@@ -21,52 +21,58 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="row collapse navbar-collapse p-3 p-sm-0" id="navbarTogglerDemo02">
-            <ul class="navbar-nav col-12 col-sm-9 me-auto mb-2 mb-lg-0 d-flex justify-content-evenly">
-                <li class="nav-item" routerLinkActive="active">
+            <ul class="navbar-nav col-12 col-sm-8 me-auto mb-2 mb-lg-0 d-flex ">
+                <li class="nav-item mx-3" routerLinkActive="active">
                     <a class="nav-link active" [routerLink]="['']">Home</a>
                 </li>
 
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" *ngIf = "usuarioService.userLoggedIn() && usuarioService.clientLogged()">
                     <a class="nav-link dropdown-toggle active" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Veterinaria</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                         <li><a class="dropdown-item" [routerLink]="[' ']">Turnos</a></li>
                         <li><a class="dropdown-item" [routerLink]="['']">Servicios</a></li>
                     </ul>
                 </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle active" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Petshop</a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                        <li><a class="dropdown-item" [routerLink]="['tienda']">Tienda</a></li>
-
-                        <li *ngIf="habilitarCarrito()"><a class="dropdown-item" [routerLink]="['carrito-compra']">Mi carrito</a></li>
-                        <li><a class="dropdown-item" [routerLink]="['']">Gestionar productos</a></li>
-                    </ul>
-                </li>
-
-                <li class="nav-item dropdown">
+                
+                <a *ngIf = "usuarioService.userLoggedIn() && usuarioService.clientLogged()" class=" nav-item nav-link  active" href="#" id="navbarScrollingDropdown" role="button" [routerLink]="['tienda']" aria-expanded="false">Tienda</a>
+                <a  *ngIf = "usuarioService.userLoggedIn() && usuarioService.clientLogged()" class=" nav-item nav-link active" href="#" id="navbarScrollingDropdown" role="button" [routerLink]="['carrito-compra']" aria-expanded="false">Carrito</a>
+              
+                 
+                <li class="nav-item dropdown" *ngIf = "usuarioService.userLoggedIn() && !usuarioService.clientLogged()">
                     <a class="nav-link dropdown-toggle active" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Gestión
+                        Gestión Productos
                         <span *ngIf="vencimientos==true" class="badge rounded-pill bg-danger">Vencimientos</span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                        <li><a class="dropdown-item" [routerLink]="['productos']">Gestionar productos</a></li>
-                        <li><a class="dropdown-item" [routerLink]="['']">Gestionar usuarios</a></li>
-                        <li><a class="dropdown-item" [routerLink]="['proveedores']">Gestionar proveedores</a></li>
-                        <li><a class="dropdown-item" [routerLink]="['categorias']">Gestionar categorías</a></li>
-                        <li *ngIf="vencimientos==true"><a class="dropdown-item bg-danger text-white" [routerLink]="['proximos-vencimientos']">Próximos vencimientos</a></li>
-                        <li *ngIf="vencimientos==false"><a class="dropdown-item" [routerLink]="['proximos-vencimientos']">Próximos vencimientos</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['productos']">Productos</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['proveedores']">Proveedores</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['categorias']">Categorías</a></li>
+                        <li *ngIf="vencimientos==true"><a class="dropdown-item bg-danger text-white" [routerLink]="['proximos-vencimientos']">Vencimientos</a></li>
+                        <li *ngIf="vencimientos==false"><a class="dropdown-item" [routerLink]="['proximos-vencimientos']">Vencimientos</a></li>
                     </ul>
                 </li>
+                <a *ngIf = "usuarioService.userLoggedIn() && usuarioService.clientLogged() == false" class=" nav-item nav-link active" href="#" id="navbarScrollingDropdown" role="button"  aria-expanded="false">Gestion Usuario</a>
+                <a *ngIf = "usuarioService.userLoggedIn() && usuarioService.clientLogged() == false" class=" nav-item nav-link active" href="#" id="navbarScrollingDropdown" role="button"  aria-expanded="false">Informes</a>
                 <!--
                 <li class="nav-item">
                     <a class="nav-link active" [routerLink]="['']">Nosotros</a>
                 </li>
                 -->
             </ul>
-            <form class="col-12 col-sm-3 row p-0 m-0 d-flex justify-content-evenly">
-                <button class="btn btn-success btn-sm col-12 col-sm-5 " type="button">Crear cuenta</button>
-                <button class="btn btn-light btn-sm col-12 col-sm-5 mt-2 mt-sm-0" type="button" [routerLink]="['login']">Ingresar</button>
+            <form class="col-12 col-sm-4 row p-0 m-0 d-flex ">
+                <div class="row text-end">
+                    <a class="col-12 text-white text-decoration-none" *ngIf="usuarioService.userLoggedIn()" [routerLink]="['login']" (click)="logout()">
+                        {{usuarioService.userLogged()}} (logout)
+                    </a>
+                    <div class="col-12 justify-content-sm-evenly" *ngIf="!usuarioService.userLoggedIn()">
+                        <button class="btn btn-dark btn-sm col-6 col-sm-10 col-md-5 "  [routerLink]="['login']">Iniciar Sesion</button>
+                        <button class="btn btn-success btn-sm col-6 col-sm-10 col-md-5 " type="button">Crear cuenta</button>
+                    </div>
+                </div>
+                
+               
+                
+                
             </form>
         </div>
     </div>

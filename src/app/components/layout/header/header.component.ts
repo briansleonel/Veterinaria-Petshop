@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Producto } from 'src/app/models/producto/producto';
 import { ProductoService } from 'src/app/services/producto/producto.service';
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { VentaService } from 'src/app/services/venta/venta.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private ventaService: VentaService,
-    private productoService: ProductoService
+    private productoService: ProductoService,
+    public usuarioService:UsuarioService
   ) { }
 
   ngOnInit(): void {
@@ -58,4 +60,8 @@ export class HeaderComponent implements OnInit {
       }
     )
   }
+  logout(){
+    this.usuarioService.logout();
+  }
+ 
 }

@@ -31,6 +31,7 @@ import { ProveedoresComponent } from './components/gestion/proveedores/proveedor
 import { CategoriasComponent } from './components/gestion/categorias/categorias.component';
 import { ProductoformComponent } from './components/gestion/productoform/productoform.component';
 import { ConfirmDialogComponent } from './components/utils/confirm-dialog/confirm-dialog.component';
+import { UsuarioService } from './services/usuario/usuario.service';
 
 
 
@@ -68,7 +69,7 @@ import { ConfirmDialogComponent } from './components/utils/confirm-dialog/confir
     NgxPaginationModule,
     ToastrModule.forRoot(), 
   ],
-  providers: [],
+  providers: [UsuarioService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

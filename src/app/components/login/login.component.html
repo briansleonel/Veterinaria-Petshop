@@ -10,20 +10,20 @@
                 <form action="">
                     <div class="form-row">
                         <div class="col-lg-7">
-                            <input type="email" placeholder="Usuario" class="form-control my-3 p-2">
+                            <input type="email" placeholder="Usuario" name="username" [(ngModel)] = "username" class="form-control my-3 p-2">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col-lg-7">
                             <div class="input-group">
-                                <input id="pass" type="password" class="form-control my-3 p-2" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="button-addon2">
+                                <input id="pass" type="password" class="form-control my-3 p-2" name="password" [(ngModel)] = "password" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="button-addon2">
                                 <button class="btn btn-outline-secondary my-3 p-2" type="button" id="button-addon2" (click)="mostrarPassword()"><i class="bi bi-eye"></i></button>
                             </div>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col-lg-7">
-                            <button type="button" class="btn1 mt-3 mb-4">Ingresar</button>
+                            <button type="button" class="btn1 mt-3 mb-4" (click)="login()">Ingresar</button>
                         </div>
                     </div>
                     <a href="#">Olvido su usuario o contraseña?</a>
