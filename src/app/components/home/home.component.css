@@ -1,0 +1,28 @@
+.bg-logo{
+    background: url("../.././../assets/home/logoPrincipal.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    min-height: 40vw;
+}
+.bg-logo h1 {
+    font-size: 4vw;
+    color: rgb(24, 75, 141) ;
+    font-style: italic;
+    font-weight: bolder;
+}
+.bg-side{
+    background: url("../../../assets/home/side1.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    min-height: 45vw;
+}
+
+.bg-atencion{
+    background: url("../../../assets/home/atencion.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 45vw;
+}
