@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Producto } from 'src/app/models/producto/producto';
 import { ProductoService } from 'src/app/services/producto/producto.service';
@@ -18,7 +19,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     private ventaService: VentaService,
     private productoService: ProductoService,
-    public usuarioService:UsuarioService
+    public usuarioService:UsuarioService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -60,8 +62,13 @@ export class HeaderComponent implements OnInit {
       }
     )
   }
+
   logout(){
     this.usuarioService.logout();
+  }
+
+  goToCart(): void {
+    this.router.navigate(['carrito-compra']);
   }
  
 }

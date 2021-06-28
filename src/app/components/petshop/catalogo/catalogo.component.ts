@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Producto } from 'src/app/models/producto/producto';
 import { ProductoService } from 'src/app/services/producto/producto.service';
 import { VentaService } from 'src/app/services/venta/venta.service';
@@ -19,8 +20,8 @@ export class CatalogoComponent implements OnInit {
 
   constructor(
     private productoService: ProductoService,
-    private ventaService: VentaService
-
+    private ventaService: VentaService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -80,11 +81,8 @@ export class CatalogoComponent implements OnInit {
   }
 
   addProductToCart(prod:Producto):void{
-    //console.log(prod);
-    //this.ventaService.listaProductos.push(prod);
     this.ventaService.venta.productos.push(prod);
-    //console.log(this.ventaService.listaProductos[0]);
-    console.log(this.ventaService.venta.productos.length);
+    this.toastr.success("Se añadió el producto al carrito de compras", "PRODUCTO AGREGADO");
   }
 
 }

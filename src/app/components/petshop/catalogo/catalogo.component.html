@@ -55,14 +55,14 @@
             <!-- ************************* Seccion de catalogo ************************* -->
             <!-- *********************************************************************** -->
             <div class="row row-cols-2 row-cols-sm-3 g-1 g-sm-4 m-0 p-0">
-                <div class="col" *ngFor ="let prod of productos | paginate: { itemsPerPage: 9, currentPage: page} ">
-                    <div class="card border-light bg-white ">
+                <div class="col" *ngFor ="let prod of productos | paginate: { itemsPerPage: 6, currentPage: page} ">
+                    <div class="card border-light bg-white h-100">
                         <img [src]="prod.img" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h4 class="card-title text-center fw-light fs-4">{{prod.nombre}}</h4>
+                            <h4 class="card-title text-center fs-5">{{prod.nombre}}</h4>
                             
-                            <p class="mt-3 mb-0 fs-4 fw-light text-success fw-bold">
-                               $ {{prod.precioVenta}}
+                            <p class="mt-3 mb-0 fs-5 fw-light text-success fw-bold text-center">
+                               {{prod.precioVenta | currency}}
                             </p>
                         </div>
                         <div class="card-body row row-cols-1 row-cols-sm-1 m-0">
@@ -113,9 +113,11 @@
             </div>
         </div>
     </div>
-    <div>
-        <pagination-controls (pageChange)="page = $event" previousLabel="Anterior" 
-        nextLabel="Siguiente"></pagination-controls>
+    <div class="row bg-dark text-white pt-3"> 
+        <div class="d-flex justify-content-center">
+            <pagination-controls (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+        </div>
+        
     </div>
 
 </div>
