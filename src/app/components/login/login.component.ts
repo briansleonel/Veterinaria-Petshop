@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 
 @Component({
@@ -16,11 +17,12 @@ export class LoginComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private usuarioService: UsuarioService,
-    private router: Router
+    private router: Router,
+    private toastr : ToastrService
   ) { }
 
   ngOnInit(): void {
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'home';
   }
   login() {
     this.usuarioService.login(this.username, this.password)
@@ -32,17 +34,21 @@ export class LoginComponent implements OnInit {
             sessionStorage.setItem("user", user.username);
             sessionStorage.setItem("userId", user.id);
             sessionStorage.setItem("rol", user.rol);
+
             //redirigimos a home o a pagina que llamo
             this.router.navigateByUrl(this.returnUrl);
+            this.toastr.success("Bienvenido "+ sessionStorage.getItem("user") + " !!", "Inicio sesion exitoso")
           } else {
             //usuario no encontrado muestro mensaje en la vista
             this.msglogin = "Credenciales incorrectas..";
+            this.toastr.error("El nombre de usuario y/o contraseña incorrectos", "Error de Ingreso");
           }
         },
         error => {
           alert("Error de conexion");
           console.log("error en conexion");
           console.log(error);
+          this.toastr.error("Error de conexion", "Error");
         });
   }
    
