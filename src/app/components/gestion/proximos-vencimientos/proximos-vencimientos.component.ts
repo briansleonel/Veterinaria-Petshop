@@ -14,6 +14,8 @@ export class ProximosVencimientosComponent implements OnInit {
   productos:Array<Producto>;
   fechaActual: Date;
   cantidadDias: number;
+  nombreProducto:string="";
+  foto:string;
 
   constructor(private router:Router,
               private productoService: ProductoService
@@ -28,6 +30,11 @@ export class ProximosVencimientosComponent implements OnInit {
     this.fechaActual = new Date();
   }
 
+  verFoto(producto:Producto){
+    this.nombreProducto=producto.nombre.toString();
+    this.foto=producto.img;
+  }
+  
   cargarProductos(){
     this.iniciarVariables();
     this.fechaActual.setDate(this.fechaActual.getDate() + 10);

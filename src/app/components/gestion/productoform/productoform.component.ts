@@ -24,6 +24,7 @@ export class ProductoformComponent implements OnInit {
   proveedores: Array<Proveedor>;
   categoriaFinal: Categoria;
   codigoValido: boolean = true;
+  vacio: boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
@@ -104,34 +105,26 @@ export class ProductoformComponent implements OnInit {
     )
   }
 
-  buscarCategoria(){
+  guardarProducto(){
     this.categoriaService.getCategoriaByTipos(this.categoriaFinal).subscribe(
       result=>{
           Object.assign(this.categoriaFinal, result[0]);
-      },
-      error=>{
-        console.log(error);
-        alert("Error al cargar Categoria");
-      }
-    )
-  }
-
-  guardarProducto(){
-    this.buscarCategoria();
-    this.producto.categoria = this.categoriaFinal;
-    this.productoService.addProducto(this.producto).subscribe(
-      result=>{
-        if(result.status=="1"){
-          this.toastr.success("El producto fue guardado correctamente", "OPERACION EXITOSA");
-          this.router.navigate(["productos"]);
-        }else{
-          this.toastr.error("No puede haber campos vacíos", "OPERACION FALLIDA");
-        }
-      },
-      error=>{
-        console.log(error);
-      }
-    )
+          this.producto.categoria = this.categoriaFinal;
+          this.productoService.addProducto(this.producto).subscribe(
+            result=>{
+              if(result.status=="1"){
+                this.toastr.success("El producto fue guardado correctamente", "OPERACION EXITOSA");
+                this.router.navigate(["productos"]);
+              }else{
+                this.toastr.error("No puede haber campos vacíos", "OPERACION FALLIDA");
+                this.vacio = true;
+              }
+            },
+            error=>{
+              console.log(error);
+            }
+          )
+      })
   }
 
   cargarProducto(id: string){
@@ -148,21 +141,33 @@ export class ProductoformComponent implements OnInit {
   }
 
   modificarProducto(){
-    this.buscarCategoria();
-    this.producto.categoria = this.categoriaFinal;
-    this.productoService.updateProducto(this.producto).subscribe(
-      result=>{
-        if(result.status=="1"){
-          this.toastr.success("El producto fue actualizado correctamente", "OPERACION EXITOSA");
-          this.router.navigate(["productos"]);
-        }else{
-          this.toastr.error("Error al actualizar el producto", "OPERACION FALLIDA");
-        }
-      },
-      error=>{
-        console.log(error);
-      }
-    )
+    if(this.producto.categoria.tipoMascota != "" && this.producto.categoria.tipoProducto != "" && this.producto.codigo != ""
+    && this.producto.descripcion != "" && this.producto.fechaRecepcion != null && this.producto.fechaVencimiento != null
+    && this.producto.img != "" && this.producto.nombre != "" && this.producto.precioCompra != null &&
+    this.producto.precioVenta != null && this.producto.stock != null){
+        this.categoriaService.getCategoriaByTipos(this.categoriaFinal).subscribe(
+          result=>{
+              Object.assign(this.categoriaFinal, result[0]);
+              this.producto.categoria = this.categoriaFinal;
+              this.productoService.updateProducto(this.producto).subscribe(
+                result=>{
+                  if(result.status=="1"){
+                    this.toastr.success("El producto fue actualizado correctamente", "OPERACION EXITOSA");
+                    this.router.navigate(["productos"]);
+                  }else{
+                    this.toastr.error("No puede haber campos vacíos", "OPERACION FALLIDA");
+                    this.vacio = true;
+                  }
+                },
+                error=>{
+                  console.log(error);
+                }
+              )
+          })
+    }else{
+      this.toastr.error("No puede haber campos vacíos", "OPERACION FALLIDA");
+      this.vacio = true;
+    }
   }
   
   validarCodigo(codigo: NgModel){

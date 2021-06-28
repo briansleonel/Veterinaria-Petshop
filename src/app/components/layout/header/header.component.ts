@@ -19,10 +19,10 @@ export class HeaderComponent implements OnInit {
     private ventaService: VentaService,
     private productoService: ProductoService,
     public usuarioService:UsuarioService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.cargarProductos()
+    this.cargarProductos();
   }
 
   habilitarCarrito():boolean{

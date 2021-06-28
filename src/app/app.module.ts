@@ -32,6 +32,9 @@ import { CategoriasComponent } from './components/gestion/categorias/categorias.
 import { ProductoformComponent } from './components/gestion/productoform/productoform.component';
 import { ConfirmDialogComponent } from './components/utils/confirm-dialog/confirm-dialog.component';
 import { UsuarioService } from './services/usuario/usuario.service';
+import { UsuariosComponent } from './components/gestion/usuarios/usuarios.component';
+import { ReportesComponent } from './components/gestion/reportes/reportes.component';
+import { UsuarioformComponent } from './components/gestion/usuarioform/usuarioform.component';
 
 
 
@@ -55,7 +58,10 @@ import { UsuarioService } from './services/usuario/usuario.service';
     ProveedoresComponent,
     CategoriasComponent,
     ProductoformComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    UsuariosComponent,
+    ReportesComponent,
+    UsuarioformComponent
   ],
   imports: [
     BrowserModule,

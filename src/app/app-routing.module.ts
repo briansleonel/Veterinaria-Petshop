@@ -13,6 +13,9 @@ import { LoginComponent } from './components/login/login.component';
 import { ProximosVencimientosComponent } from './components/gestion/proximos-vencimientos/proximos-vencimientos.component';
 import { ProveedoresComponent } from './components/gestion/proveedores/proveedores.component';
 import { CategoriasComponent } from './components/gestion/categorias/categorias.component';
+import { UsuariosComponent } from './components/gestion/usuarios/usuarios.component';
+import { UsuarioformComponent } from './components/gestion/usuarioform/usuarioform.component';
+import { ReportesComponent } from './components/gestion/reportes/reportes.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -28,6 +31,9 @@ const routes: Routes = [
   {path: 'proximos-vencimientos', component: ProximosVencimientosComponent},
   {path: 'categorias', component: CategoriasComponent},
   {path: 'proveedores', component: ProveedoresComponent},
+  {path: 'usuarios', component: UsuariosComponent},
+  {path: 'form-usuario/:id', component: UsuarioformComponent},
+  {path: 'reportes', component: ReportesComponent},
 ];
 
 @NgModule({

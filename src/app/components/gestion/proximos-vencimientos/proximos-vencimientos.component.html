@@ -38,18 +38,38 @@
                         <tr class="text-center   ">
                             <th>Codigo</th>
                             <th>Nombre</th>
+                            <th>Foto</th>
                             <th>Stock</th>
-                            <th> Proveedor</th>
+                            <th>Proveedor</th>
                             <th>Categoria</th>
                             <th>Precio Compra</th>
-                            <th> Precio Venta</th>
+                            <th>Precio Venta</th>
                             <th>Vencimiento</th>
                         </tr>
                     </thead>
                     <tbody class="text-center">
                         <tr *ngFor="let producto of mf.data">
-                            <td>CP{{producto.codigo}}</td>
+                            <td>{{producto.codigo}}</td>
                             <td>{{producto.nombre}}</td>
+                            <td>
+                                <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                                    data-bs-target="#imagenModal" (click)="verFoto(producto)"><i class="bi bi-image"></i></button>
+    
+                                <!-- Modal -->
+                                <div class="modal fade" id="imagenModal" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-dark text-white">
+                                                <h5 class="m-auto">{{nombreProducto}}</h5>
+                                            </div>
+                                            <div class="modal-body">
+                                                <img src="{{foto}}" class="img-fluid" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
                             <td>{{producto.stock}}</td>
                             <td>{{producto.proveedor.nombre}}</td>
                             <td>{{producto.categoria.tipoMascota}} - {{producto.categoria.tipoProducto}}</td>

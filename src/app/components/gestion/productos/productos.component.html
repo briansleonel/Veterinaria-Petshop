@@ -20,61 +20,47 @@
                     <div class="col-12">
                         <h3>Filtrar por:</h3>
                     </div>
-                    <div class="col">
-                        <select class="form-select mb-3 " aria-label=".form-select-lg example" >
-                            <option selected value="">Tipo de Mascota </option>
-                            <option value="Perro">Perro</option>
-                            <option value="Gato">Gato</option>
-                            <option value="Otros">Otros</option>
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <select class="form-select mb-3 " aria-label=".form-select-lg example" [(ngModel)]="mascotaSeleccionada" (change)="filtrarTipoMascota()">
+                            <option selected>Tipo de Mascota</option>
+                            <option *ngFor="let tipoMascota of tiposMascota" [ngValue]="tipoMascota">{{tipoMascota}}</option>
                         </select>
                     </div>
-                    <div class="col">
-                        <select class="form-select mb-3" aria-label=".form-select-lg example">
-                            <option selected value="" class="fw-bolder">Tipo de producto</option>
-                            <option value="Alimentos">Alimentos</option>
-                            <option value="Accesorios">Accesorios</option>
-                            <option value="Estética e higiene">Estética e higiene</option>
-                            <option value="Salud">Salud</option>
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <select class="form-select mb-3" aria-label=".form-select-lg example" [(ngModel)]="categoriaSeleccionada" (change)="filtrarTipoProducto()">
+                            <option selected>Categoria</option>
+                            <option *ngFor="let tipoProducto of tiposProductos" [ngValue]="tipoProducto">{{tipoProducto}}</option>
                         </select>
                     </div>
-                    <!--
-                    <div class="col">
-                        <select class="form-select mb-3" aria-label=".form-select-lg example">
-                            <option selected class="fw-bolder">Marca</option>
-                            <option value="1">Alimento</option>
-                            <option value="2">Medicamento</option>
-                            <option value="3">Indumentaria</option>
-                            <option value="3">Higiene</option>
-                            <option value="3">Hogar</option>
-                            <option value="3">Seguridad</option>
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <select class="form-select mb-3" aria-label=".form-select-lg example" [(ngModel)]="precioSeleccionado" (change)="filtrarPrecio()">
+                            <option selected>Precio Compra</option>
+                            <option value="500">Hasta $500</option>
+                            <option value="1000">Hasta $1000</option>
+                            <option value="1500">Hasta $1500</option>
+                            <option value="2000">Hasta $2000</option>
+                            <option value="2500">Hasta $2500</option>
+                            <option value="3000">Hasta $3000</option>
+                            <option value="3500">Hasta $3500</option>
+                            <option value="4000">Hasta $4000</option>
+                            <option value="4500">Hasta $4500</option>
+                            <option value="5000">Hasta $5000</option>
+                            <option value="5001">$5001 o más</option>
                         </select>
                     </div>
-                    -->
-                    <div class="col">
-                        <select class="form-select mb-3" aria-label=".form-select-lg example" (ngModelChange)="filterByPrecio($event)" [(ngModel)]="filterTypePrecio">
-                            <option selected value="0">Precio</option>
-                            <option value="300">Hasta $300.00</option>
-                            <option value="500">Hasta $500.00</option>
-                            <option value="1000">Hasta $1000.00</option>
-                            <option value="1500">Hasta $1500.00</option>
-                            <option value="2000">Hasta $2000.00</option>
-                            <option value="3000">Hasta $3000.00</option>
-                            <option value="5000">Hasta $5000.00</option>
-                        </select>
-                    </div>
-                    <div class="col">
-                        <select class="form-select mb-3" aria-label=".form-select-lg example" (ngModelChange)="filterByProveedor($event)" [(ngModel)]="filterTypeProveedor">
-                            <option selected value="" class="fw-bolder">Proveedor</option>
-                            <option *ngFor="let prov of proveedores" value="{{prov.nombre}}">{{prov.nombre}}</option>
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <select class="form-select mb-3" aria-label=".form-select-lg example" [(ngModel)]="proveedorSeleccionado" (change)="filtrarProveedor()">
+                            <option selected>Proveedor</option>
+                            <option *ngFor="let proveedor of proveedores" [ngValue]="proveedor.nombre">{{proveedor.nombre}}</option>
                         </select>
                     </div>
                     <div class="col-12 mb-2">
                         <form class="row p-0 d-flex justify-content-center g-2 ">
                             <div class="col-12 col-md-8">
-                                <input name="findNameProd" type="text" class="form-control fs-5 " placeholder="Ingrese Nombre o Codigo de Producto ..." [(ngModel)]="findNameProd" >
+                                <input [(ngModel)]="nombreCodigo" name="nombreCodigo" type="text" class="form-control fs-5 " placeholder="Ingrese Nombre o Código de Producto ...">
                             </div>
-                            <div class="col-12 col-sm-4 col-md-2 ">
-                                <button type="button" class="btn btn-primary  btn-lg w-100 m-auto" (click)="cargarProductos()">
+                            <div class="col-12 col-sm-4 col-md-3 ">
+                                <button (click)="buscarProducto()" type="button" class="btn btn-primary  btn-lg w-100 m-auto">
                                     Buscar
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" fill="currentColor" class="bi bi-search"
                                         viewBox="0 0 16 16">
@@ -83,14 +69,14 @@
                                     </svg>
                                 </button>
                             </div>
-                            <div class="col-12 col-sm-4 col-md-2 " (click)="cleanFilters()">
-                                <button type="button" class="btn btn-success  btn-lg w-100 m-auto">
-                                    Limpiar
-                                </button>
-                            </div>
                         </form>
                     </div>
                 </div>
+            </div>
+            <div class="col-12 col-sm-4 col-md-2 mt-2 mt-md-0 ">
+                <button (click)="cargarProductos()" type="button" class="btn btn-success  btn-lg w-100 m-auto">
+                    Limpiar filtros
+                </button>
             </div>
 
             <div class="col-12 ">
@@ -99,21 +85,41 @@
                         [mfRowsOnPage]="10">
                         <thead class="table-dark ">
                             <tr class="text-center   ">
-                                <th>Codigo</th>
+                                <th>Código</th>
                                 <th>Nombre</th>
+                                <th>Foto</th>
                                 <th>Stock</th>
-                                <th> Proveedor</th>
-                                <th>Categoria</th>
+                                <th>Proveedor</th>
+                                <th>Categoría</th>
                                 <th>Precio Compra</th>
-                                <th> Precio Venta</th>
+                                <th>Precio Venta</th>
                                 <th>Vencimiento</th>
-                                <th>Accion</th>
+                                <th>Acción</th>
                             </tr>
                         </thead>
                         <tbody class="text-center">
                             <tr *ngFor="let producto of mf.data">
-                                <td>CP{{producto.codigo}}</td>
+                                <td>{{producto.codigo}}</td>
                                 <td>{{producto.nombre}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                                        data-bs-target="#imagenModal" (click)="verFoto(producto)"><i class="bi bi-image"></i></button>
+        
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="imagenModal" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-dark text-white">
+                                                    <h5 class="m-auto">{{nombreProducto}}</h5>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <img src="{{foto}}" class="img-fluid" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
                                 <td>{{producto.stock}}</td>
                                 <td>{{producto.proveedor.nombre}}</td>
                                 <td>{{producto.categoria.tipoMascota}} - {{producto.categoria.tipoProducto}}</td>
@@ -138,6 +144,11 @@
                             </tr>
                         </tfoot>
                     </table>
+                    <div class="col-12 p-0" *ngIf="productos.length == 0">
+                        <div class="py-3 alert alert-danger fs-2 fw-bold fst-italic text-uppercase text-center" role="alert">
+                            No se encontraron coincidencias
+                        </div>
+                    </div>
                 </div>
             </div>
 

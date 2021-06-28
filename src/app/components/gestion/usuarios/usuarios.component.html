@@ -1,0 +1,119 @@
+
+<div class="row mt-3 min-vh-100 m-0 ">
+    <div class="col-11 mx-auto bg-body">
+        <div class="row text-uppercase bg-dark py-5 text-center align-items-center">
+            <div class="col-12 col-md-8">
+                <p class=" fs-2 fw-bold text-white m-0"> gestión de usuarios</p>
+            </div>
+            <div class="text-center col-12 col-md-4 p-0 m-0">
+                <button class="btn btn-primary btn-lg p-3 fs-5 fw-bold m-0 mt-4 mt-md-0 me-md-3" (click)="agregarUsuario()">
+                    <i class="bi bi-plus-lg"></i>
+                        CREAR USUARIO
+                </button>
+            </div>
+        </div>
+        
+        <div class="col-12">
+            <div class="p-md-4">
+                
+                <div class="row row-cols-auto justify-content-around filtros mt-1 pt-3 pb-3">
+                    <div class="col-12">
+                        <h3>Filtrar por:</h3>
+                    </div>
+                    
+                    <div class="col-12 mb-3">
+                        
+                        <div class="row justify-content-center p-0 mb-3">
+                            <div class="col-12 col-sm-4">
+                                <input [(ngModel)]="nombreUsuario" name="nombreUsuario" type="text" class="form-control fs-5 " placeholder="Nombre">
+                            </div>
+                            <div class="col-12 col-sm-4  mt-2 mt-sm-0 ">
+                                <input [(ngModel)]="apellidoUsuario" name="apellidoUsuario" type="text" class="form-control fs-5 " placeholder="Apellido">
+                            </div>
+                            <div class="col-10 col-sm-4 col-md-3 col-lg-2 mt-2 mt-sm-0">
+                                <button (click)="cargarUsuarios()" type="button" class="btn btn-primary fs-5 w-100 m-auto">
+                                    Buscar
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center p-0 mb-3">
+                            <div class="col-2 col-sm-2 col-md-2">
+                                <h5 class="text-end mt-2" >Rol:</h5>
+                            </div>
+                            <div class="col-10 col-sm-6 col-md-5">
+                                <select class="form-select fs-5" aria-label=".form-select-lg example" name="rolSeleccionado" [(ngModel)]="rolSeleccionado" (change)="cargarUsuarios()">
+                                    <option>Administrador</option>
+                                    <option>Empleado</option>
+                                    <option>Secretaria</option>
+                                    <option>Cliente</option>
+                                </select>
+                            </div>
+                            <div class="col-10 col-sm-4 col-md-3 col-lg-2 mt-2 mt-sm-0">
+                                <button (click)="limpiarFiltros()" type="button" class="btn btn-success fs-5 w-100 m-auto" title="Limpiar filtros">
+                                    Limpiar <i class="bi bi-funnel"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+            <div class="col-12 ">
+                <div class="p-md-2 mt-1 table-responsive min-vh-100">
+                    <table class="table table-striped align-middle " [mfData]="usuarios" #mf="mfDataTable"
+                        [mfRowsOnPage]="10">
+                        <thead class="table-dark ">
+                            <tr class="text-center   ">
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Domicilio</th>
+                                <th>Email</th>
+                                <th>Teléfono</th>
+                                <th>Rol</th>
+                                <th>Username</th>
+                                <th>Password</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            <tr *ngFor="let usuario of mf.data">
+                                <td>{{usuario.nombre}}</td>
+                                <td>{{usuario.apellido}}</td>
+                                <td>{{usuario.domicilio}}</td>
+                                <td>{{usuario.email}}</td>
+                                <td>{{usuario.telefono}}</td>
+                                <td>{{usuario.tipoUsuario}}</td>
+                                <td>{{usuario.username}}</td>
+                                <td>{{usuario.password}}</td>
+                                <td>
+                                    <button (click)="modificarUsuario(usuario)" type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                            title="Editar"><i class="bi bi-pencil"></i>
+                                    </button>  
+                                    <button (click)="confirmDelete(usuario)" type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                            title="Eliminar"><i class="bi bi-trash"></i>
+                                    </button>  
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4">
+                                    <mfBootstrapPaginator [rowsOnPageSet]="[10,20,25]"></mfBootstrapPaginator>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <div class="col-12 p-0" *ngIf="usuarios.length == 0">
+                        <div class="py-3 alert alert-danger fs-2 fw-bold fst-italic text-uppercase text-center" role="alert">
+                            No se encontraron coincidencias
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

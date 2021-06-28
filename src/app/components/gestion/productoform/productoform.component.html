@@ -14,27 +14,42 @@
                         <div *ngIf="codigoValido == false" class=" m-0 p-0 alert alert-danger align-items-center">
                             <p  class="mx-4" >El código ya esta registrado</p>
                         </div>
+                        <div *ngIf="(producto.codigo == '' || producto.codigo == null) && vacio==true" class=" m-0 p-0 alert alert-danger align-items-center">
+                            <p class="mx-4 mt-2">*Campo requerido</p>
+                        </div>
                     </div>
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="nombre" placeholder="" name="nombre"
                         [(ngModel)]="producto.nombre">
                         <label for="nombre">Nombre de producto</label>
+                        <div *ngIf="(producto.nombre == '' || producto.nombre == null) && vacio==true" class=" m-0 p-0 alert alert-danger align-items-center">
+                            <p class="mx-4 mt-2">*Campo requerido</p>
+                        </div>
                     </div>
                     <div class="form-floating mb-3">
                         <textarea class="form-control" placeholder="" id="prodDescripcion"
                             style="height: 100px" name="descripcion" [(ngModel)]="producto.descripcion"></textarea>
                         <label for="prodDescripcion">Descripción</label>
+                        <div *ngIf="(producto.descripcion == '' || producto.descripcion == null) && vacio==true" class=" m-0 p-0 alert alert-danger align-items-center">
+                            <p class="mx-4 mt-2">*Campo requerido</p>
+                        </div>
                     </div>
                     <div class="row row-cols-1 row-cols-md-2">
                         <div class="col form-floating mb-3">
                             <input type="number" class="form-control" id="prodPrecio" placeholder=""
                             name="precioCompra" [(ngModel)]="producto.precioCompra">
                             <label for="prodPrecio">Precio de Compra</label>
+                            <div *ngIf="(producto.precioCompra == 0 || producto.precioCompra == null) && vacio==true" class=" m-0 p-0 alert alert-danger align-items-center">
+                                <p class="mx-4 mt-2">*Campo requerido</p>
+                            </div>
                         </div>
                         <div class=" col form-floating mb-3">
                             <input type="number" class="form-control" id="prodVenta" placeholder=""
                             name="precioVenta" [(ngModel)]="producto.precioVenta">
                             <label for="prodVenta">Precio de Venta</label>
+                            <div *ngIf="(producto.precioVenta == 0 || producto.precioVenta == null) && vacio==true" class=" m-0 p-0 alert alert-danger align-items-center">
+                                <p class="mx-4 mt-2">*Campo requerido</p>
+                            </div>
                         </div>
                     </div>
                     <div class="row row-cols-1 row-cols-md-2" *ngIf="accion=='new'">
@@ -42,11 +57,20 @@
                             <input type="date" class="form-control" id="prodRecepcion" placeholder=""
                                 style="height: 80px" name="fechaRecepcion" [(ngModel)]="producto.fechaRecepcion">
                             <label for="prodRecepcion">Fecha De Recepcion</label>
+                            <div *ngIf="(producto.fechaRecepcion == '' || producto.fechaRecepcion == null) && vacio==true" class=" m-0 p-0 alert alert-danger align-items-center">
+                                <p class="mx-4 mt-2">*Campo requerido</p>
+                            </div>
                         </div>
                         <div class=" col form-floating mb-3">
                             <input type="date" class="form-control" id="prodVencimiento" placeholder=""
                                 style="height: 80px" name="fechaVencimiento" [(ngModel)]="producto.fechaVencimiento">
                             <label for="prodVencimiento">Fecha de Vencimiento</label>
+                            <div *ngIf="(producto.fechaVencimiento == '' || producto.fechaVencimiento == null) && vacio==true" class=" m-0 p-0 alert alert-danger align-items-center">
+                                <p class="mx-4 mt-2">*Campo requerido</p>
+                            </div>
+                            <div *ngIf="producto.fechaRecepcion > producto.fechaVencimiento" class=" m-0 p-0 alert alert-danger align-items-center">
+                                <p class="mx-4 mt-2">La fecha de vencimiento no puede ser mayor a la fecha de recepción</p>
+                            </div>
                         </div>
                     </div>
                     
@@ -55,6 +79,9 @@
                         <input type="number" class="form-control" id="prodStock" placeholder=""
                         name="stock" [(ngModel)]="producto.stock">
                         <label for="prodStock">Stock</label>
+                        <div *ngIf="producto.stock == null && vacio==true" class=" m-0 p-0 alert alert-danger align-items-center">
+                            <p class="mx-4 mt-2">*Campo requerido</p>
+                        </div>
                     </div>
 
                     <div class="form-floating mb-3">
@@ -62,6 +89,9 @@
                             <option *ngFor="let proveedor of proveedores" [ngValue]="proveedor">{{proveedor.nombre}}</option>
                         </select>
                         <label for="floatingSelect">Proveedor</label>
+                        <div *ngIf="(producto.proveedor.nombre == null || producto.proveedor == null) && vacio==true" class=" m-0 p-0 alert alert-danger align-items-center">
+                            <p class="mx-4 mt-2">*Campo requerido</p>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-12 col-sm-6 form-floating mb-3">
@@ -69,12 +99,18 @@
                                 <option *ngFor="let tipoProducto of tiposProductos" [ngValue]="tipoProducto">{{tipoProducto}}</option>
                             </select>
                             <label for="floatingSelect">Categoría</label>
+                            <div *ngIf="(categoriaFinal.tipoProducto == '' || categoriaFinal.tipoProducto == null) && vacio==true" class=" m-0 p-0 alert alert-danger align-items-center">
+                                <p class="mx-4 mt-2">*Campo requerido</p>
+                            </div>
                         </div>
                         <div class="col-12 col-sm-6 form-floating mb-3">
                             <select [(ngModel)]="categoriaFinal.tipoMascota" class="form-select" name="categoria" id="floatingSelect" aria-label="Floating label select example">
                                 <option *ngFor="let tipoMascota of tiposMascota" [ngValue]="tipoMascota">{{tipoMascota}}</option>
                             </select>
                             <label for="floatingSelect">Tipo de Mascota</label>
+                            <div *ngIf="(categoriaFinal.tipoMascota == '' || categoriaFinal.tipoMascota == null) && vacio==true" class=" m-0 p-0 alert alert-danger align-items-center">
+                                <p class="mx-4 mt-2">*Campo requerido</p>
+                            </div>
                         </div>
                     </div>
 
@@ -85,6 +121,9 @@
                         <div>
                             <img *ngIf="producto.img !=''" [src]="producto.img" width="60%" class="mt-3" 
                                 alt="Debe cargar una imagen">
+                        </div>
+                        <div *ngIf="(producto.img == '' || producto.img == null) && vacio==true" class=" m-0 p-0 alert alert-danger align-items-center">
+                            <p class="mx-4 mt-2">*Campo requerido</p>
                         </div>
                     </div>
                 </form>
