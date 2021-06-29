@@ -58,14 +58,15 @@
                 <div class="col" *ngFor ="let prod of productos | paginate: { itemsPerPage: 6, currentPage: page} ">
                     <div class="card border-light bg-white h-100">
                         <img [src]="prod.img" class="card-img-top" alt="...">
-                        <div class="card-body">
+                        <div class="card-body pb-0">
                             <h4 class="card-title text-center fs-5">{{prod.nombre}}</h4>
                             
                             <p class="mt-3 mb-0 fs-5 fw-light text-success fw-bold text-center">
                                {{prod.precioVenta | currency}}
                             </p>
+                            <p class="text-success text-center"> <i class="bi bi-truck fs-3"></i> Envios a Domicilio</p>
                         </div>
-                        <div class="card-body row row-cols-1 row-cols-sm-1 m-0">
+                        <div class="card-body row row-cols-1 row-cols-sm-1 m-0 pt-0">
                             <div class="col p-1">
                                 <a class="btn btn-dark  w-100 m-0" [routerLink]="['product', prod._id]">
                                     Ver&nbsp;
@@ -75,29 +76,6 @@
                                     </svg>
                                 </a>
                             </div>
-                            <!--<div class=" card-body row row-cols-3 m-0">
-                                <div class="col">
-                                    <button class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                        title="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" 
-                                    fill="none" stroke="#f2f2f2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                    <line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                                    </button>
-                                </div>
-                                <div class="col">
-                                    <p>{{produto.cantidadElegida}}</p>
-                                </div>
-                                <div class="col ">
-                                    <button class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                        title="Eliminar Registro">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" 
-                                    fill="none" stroke="#f2f2f2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                    <line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                                    </button>
-                                </div>
-                                
-
-                            </div>-->
                             <div class="col p-1">
                                 <button class="btn btn-primary  w-100 m-0" (click)= "addProductToCart(prod)">
                                     Añadir 

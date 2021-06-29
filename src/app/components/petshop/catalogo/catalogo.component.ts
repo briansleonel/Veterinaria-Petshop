@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Producto } from 'src/app/models/producto/producto';
 import { ProductoService } from 'src/app/services/producto/producto.service';
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { VentaService } from 'src/app/services/venta/venta.service';
 
 @Component({
@@ -21,7 +23,9 @@ export class CatalogoComponent implements OnInit {
   constructor(
     private productoService: ProductoService,
     private ventaService: VentaService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private usuarioService: UsuarioService,
+    private router : Router
   ) { }
 
   ngOnInit(): void {
@@ -78,8 +82,17 @@ export class CatalogoComponent implements OnInit {
   }
 
   addProductToCart(prod:Producto):void{
-    this.ventaService.venta.productos.push(prod);
-    this.toastr.success("Se añadió el producto al carrito de compras", "PRODUCTO AGREGADO");
+    if(!this.usuarioService.userLoggedIn()){
+      this.toastr.info("Inicie sesion para Continuar");
+      this.router.navigate(['login']);
+    }else if(this.usuarioService.clientLogged()){
+      this.ventaService.venta.productos.push(prod);
+      this.toastr.success("Se añadió el producto al carrito de compras", "PRODUCTO AGREGADO");
+    }else{
+      this.toastr.error("El tipo de usuario no es conocido por el sistema","Error de autenticacion");
+      this.router.navigate(['home']);
+    }
+    
   }
 
 }
