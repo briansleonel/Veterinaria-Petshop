@@ -39,9 +39,87 @@
                             </div>
                             <div class="row col-12 mt-3 justify-content-center">
                                 <div class="col-5 col-sm-4 col-md-3 col-lg-2 p-0 text-center me-3">
-                                    <button (click)="generarInforme()" type="button" class="btn btn-primary w-100 fs-5 m-auto" title="Generar reporte">
+                                    <button [disabled]="fechaDesde == null || fechaHasta == null || tipoSeleccionado == '' || fechaDesde > fechaHasta || ventas.length == 0" data-bs-toggle="modal" data-bs-target="#imagenModal" 
+                                   type="button" class="btn btn-primary w-100 fs-5 m-auto" title="Generar reporte">
                                         Generar 
                                     </button>
+                                    <div class="modal fade" id="imagenModal" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-dark text-white">
+                                                    <h5 class="m-auto">Informe de ventas</h5>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div id="formVentas">
+                                                        <p>De {{fechaDesde | date: 'dd/MM/yyyy'}} a {{fechaHasta | date: 'dd/MM/yyyy'}} </p>
+                                                        <table class="table table-striped align-middle ">
+                                                            <thead class="table-dark ">
+                                                                <tr class="text-center   ">
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                    <th>Precio Neto</th>
+                                                                    <th>Iva</th>
+                                                                    <th>Precio Total</th>
+                                                                    <th></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody class="text-center">
+                                                                <tr style="font-weight: bold;">
+                                                                    <td></td>
+                                                                    <td>TOTALES</td>
+                                                                    <td>{{precioNetoTotal | currency:"$"}}</td>
+                                                                    <td>{{ivaTotal | currency:"$"}}</td>
+                                                                    <td>{{precioTotalTotal | currency:"$"}}</td>
+                                                                    <td></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <table class="table table-striped align-middle " [mfData]="ventas" #mf="mfDataTable"
+                                                            [mfRowsOnPage]="10">
+                                                            <thead class="table-dark ">
+                                                                <tr class="text-center   ">
+                                                                    <th>Fecha</th>
+                                                                    <th>Cliente</th>
+                                                                    <th>Precio Neto</th>
+                                                                    <th>Iva</th>
+                                                                    <th>Precio Total</th>
+                                                                    <th>Forma de pago</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody class="text-center">
+                                                                <tr *ngFor="let venta of mf.data">
+                                                                    <td>{{venta.fecha | date:"dd/MM/yyyy"}}</td>
+                                                                    <td>{{venta.usuario.apellido}}, {{venta.usuario.nombre}} </td>
+                                                                    <td>{{venta.pago.precioNeto | currency:"$"}}</td>
+                                                                    <td>{{venta.pago.iva | currency:"$"}}</td>
+                                                                    <td>{{venta.pago.precioTotal | currency:"$"}}</td>
+                                                                    <td>{{venta.pago.formaPago}}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                            <tfoot>
+                                                                <tr>
+                                                                    <td colspan="4">
+                                                                        <mfBootstrapPaginator [rowsOnPageSet]="[10,20,25]"></mfBootstrapPaginator>
+                                                                    </td>
+                                                                </tr>
+                                                            </tfoot>
+                                                        </table>
+                                                        <div class="col-12 p-0" *ngIf="ventas.length == 0">
+                                                            <div class="py-3 alert alert-danger fs-2 fw-bold fst-italic text-uppercase text-center" role="alert">
+                                                                No se encontraron coincidencias
+                                                            </div>
+                                                        </div>
+                                                </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-success m-auto" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                        title="" (click)="generarInforme()">Descargar
+                                                    </button> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-5 col-sm-4 col-md-3 col-lg-2 p-0 text-center">
                                     <button (click)="limpiarFiltros()" type="button" class="btn btn-success w-100 fs-5 m-auto" title="Limpiar filtros">
@@ -57,41 +135,43 @@
 
             <div class="col-12 ">
                 <div class="p-md-2 mt-1 table-responsive min-vh-100">
-                    <table class="table table-striped align-middle " [mfData]="ventas" #mf="mfDataTable"
-                        [mfRowsOnPage]="10">
-                        <thead class="table-dark ">
-                            <tr class="text-center   ">
-                                <th>Fecha</th>
-                                <th>Cliente</th>
-                                <th>Precio Neto</th>
-                                <th>Iva</th>
-                                <th>Precio Total</th>
-                                <th>Forma de pago</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-center">
-                            <tr *ngFor="let venta of mf.data">
-                                <td>{{venta.fecha | date:"dd/MM/yyyy"}}</td>
-                                <td>{{venta.usuario.apellido}}, {{venta.usuario.nombre}} </td>
-                                <td>{{venta.pago.precioNeto | currency:"$"}}</td>
-                                <td>{{venta.pago.iva | currency:"$"}}</td>
-                                <td>{{venta.pago.precioTotal | currency:"$"}}</td>
-                                <td>{{venta.pago.formaPago}}</td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="4">
-                                    <mfBootstrapPaginator [rowsOnPageSet]="[10,20,25]"></mfBootstrapPaginator>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                    <div class="col-12 p-0" *ngIf="ventas.length == 0">
-                        <div class="py-3 alert alert-danger fs-2 fw-bold fst-italic text-uppercase text-center" role="alert">
-                            No se encontraron coincidencias
+                    <div id="formVentas">
+                        <table class="table table-striped align-middle " [mfData]="ventas" #mf="mfDataTable"
+                            [mfRowsOnPage]="10">
+                            <thead class="table-dark ">
+                                <tr class="text-center   ">
+                                    <th>Fecha</th>
+                                    <th>Cliente</th>
+                                    <th>Precio Neto</th>
+                                    <th>Iva</th>
+                                    <th>Precio Total</th>
+                                    <th>Forma de pago</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                <tr *ngFor="let venta of mf.data">
+                                    <td>{{venta.fecha | date:"dd/MM/yyyy"}}</td>
+                                    <td>{{venta.usuario.apellido}}, {{venta.usuario.nombre}} </td>
+                                    <td>{{venta.pago.precioNeto | currency:"$"}}</td>
+                                    <td>{{venta.pago.iva | currency:"$"}}</td>
+                                    <td>{{venta.pago.precioTotal | currency:"$"}}</td>
+                                    <td>{{venta.pago.formaPago}}</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="4">
+                                        <mfBootstrapPaginator [rowsOnPageSet]="[10,20,25]"></mfBootstrapPaginator>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <div class="col-12 p-0" *ngIf="ventas.length == 0">
+                            <div class="py-3 alert alert-danger fs-2 fw-bold fst-italic text-uppercase text-center" role="alert">
+                                No se encontraron coincidencias
+                            </div>
                         </div>
-                    </div>
+                    
                 </div>
             </div>
 
