@@ -28,7 +28,7 @@
                             </div>
                             <div class="col-10  col-sm-8 col-md-4 col-lg-3">
                                 <input type="date" class="form-control fs-5" id="fechaDesde" placeholder="" name="fechaDesde"
-                                [(ngModel)]="fechaDesde">
+                                [(ngModel)]="fechaDesde" (change)="filtrarFechas()">
                             </div>
                             <div class="col-2  col-sm-3 col-md-1 col-lg-1 mt-3 mt-md-0">
                                 <h5 class="text-end mt-2" >A:</h5>
@@ -105,11 +105,6 @@
                                                                 </tr>
                                                             </tfoot>
                                                         </table>
-                                                        <div class="col-12 p-0" *ngIf="ventas.length == 0">
-                                                            <div class="py-3 alert alert-danger fs-2 fw-bold fst-italic text-uppercase text-center" role="alert">
-                                                                No se encontraron coincidencias
-                                                            </div>
-                                                        </div>
                                                 </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -135,7 +130,6 @@
 
             <div *ngIf="tipoSeleccionado=='Ventas'" class="col-12 ">
                 <div class="p-md-2 mt-1 table-responsive min-vh-100">
-                    <div id="formVentas">
                         <table class="table table-striped align-middle " [mfData]="ventas" #mf="mfDataTable"
                             [mfRowsOnPage]="10">
                             <thead class="table-dark ">
@@ -171,11 +165,52 @@
                                 No se encontraron coincidencias
                             </div>
                         </div>
-                    
+            </div>
+        </div>
+        <div *ngIf="tipoSeleccionado=='Compras'"  class="col-12 ">
+            <div class="p-md-2 mt-1 table-responsive min-vh-100">
+                <table class="table table-striped align-middle " [mfData]="productos" #mf="mfDataTable"
+                    [mfRowsOnPage]="10">
+                    <thead class="table-dark ">
+                        <tr class="text-center   ">
+                            <th>Código</th>
+                            <th>Nombre</th>
+                            <th>Stock</th>
+                            <th>Proveedor</th>
+                            <th>Categoría</th>
+                            <th>Precio Compra</th>
+                            <th>Precio Venta</th>
+                            <th>Recepción</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <tr *ngFor="let producto of mf.data">
+                            <td>{{producto.codigo}}</td>
+                            <td>{{producto.nombre}}</td>
+                            <td>{{producto.stock}}</td>
+                            <td>{{producto.proveedor.nombre}}</td>
+                            <td>{{producto.categoria.tipoMascota}} - {{producto.categoria.tipoProducto}}</td>
+                            <td>{{producto.precioCompra | currency:'$'}}</td>
+                            <td>{{producto.precioVenta | currency:'$'}}</td>
+                            <td>{{producto.fechaRecepcion | date : 'dd/MM/yyyy' }}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4">
+                                <mfBootstrapPaginator [rowsOnPageSet]="[10,20,25]"></mfBootstrapPaginator>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <div class="col-12 p-0" *ngIf="productos.length == 0">
+                    <div class="py-3 alert alert-danger fs-2 fw-bold fst-italic text-uppercase text-center" role="alert">
+                        No se encontraron coincidencias
+                    </div>
                 </div>
             </div>
-
         </div>
+
     </div>
 
 </div>

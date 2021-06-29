@@ -4,6 +4,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Venta } from 'src/app/models/venta/venta';
 import { VentaService } from 'src/app/services/venta/venta.service';
 import * as printJS from 'print-js';
+import { Producto } from 'src/app/models/producto/producto';
+import { ProductoService } from 'src/app/services/producto/producto.service';
 
 @Component({
   selector: 'app-reportes',
@@ -23,14 +25,19 @@ export class ReportesComponent implements OnInit {
   precioNetoTotal: number;
   ivaTotal: number;
   precioTotalTotal: number;
+  productos: Array<Producto>;
+  productos2: Array<Producto>;
+  productosSeleccionado: Array<Producto>;
+  precioCompraTotal: number;
 
-  constructor(
+  constructor(private productoService: ProductoService,
               private ventaService: VentaService,
               private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.iniciarVariables();
     this.cargarVentas();
+    this.cargarProductos();
   }
 
   iniciarVariables(){
@@ -40,6 +47,9 @@ export class ReportesComponent implements OnInit {
     this.tipoSeleccionado = "";
     this.fechaDesde = null;
     this.fechaHasta = null;
+    this.productos = new Array<Producto>();
+    this.productos2 = new Array<Producto>();
+    this.productosSeleccionado = new Array<Producto>();
   }
 
   iniciarTotales(){
@@ -66,31 +76,52 @@ export class ReportesComponent implements OnInit {
     )
   }
 
+  cargarProductos() {
+    this.productos = new Array<Producto>()
+    this.productoService.get("", "").subscribe(
+      result=>{
+        result.forEach(element => {
+          let vProducto= new Producto();
+          Object.assign(vProducto, element);
+          this.productos.push(vProducto);
+          this.productos2.push(vProducto);
+        });
+      },
+      error=>{
+        console.log(error);
+        alert("Error al cargar producto");
+      }
+    )
+  }
+
   limpiarFiltros(){
     this.iniciarVariables();
     this.cargarVentas();
+    this.cargarProductos();
   }
 
   filtrarFechas(){
     this.iniciarTotales();
-    if (this.fechaDesde <= this.fechaHasta){
-      this.ventasSeleccionadas = new Array<Venta>();
-      this.ventas2.forEach(element => {
-        let cadena = element.fecha.toString().slice(0, -14); 
-        var fecha = Date.parse(cadena)
-        var fechaDes = Date.parse(this.fechaDesde.toString());
-        var fechaHas = Date.parse(this.fechaHasta.toString());
-        if (fecha < fechaHas && fecha > fechaDes){
-          this.precioNetoTotal = this.precioNetoTotal + element.pago.precioNeto;
-          this.precioTotalTotal = this.precioTotalTotal + element.pago.precioTotal;
-          this.ivaTotal = this.ivaTotal + element.pago.iva;
-          this.ventasSeleccionadas.push(element);
-        }
-      });
-      this.ventas = this.ventasSeleccionadas;
-    }else{
-      this.ventas = this.ventas2;
-      this.toastr.error("La fecha 'A:' no puede ser masyor a la fecha 'De:'", "OPERACION FALLIDA");
+    if(this.fechaHasta != null){
+      if (this.fechaDesde <= this.fechaHasta){
+        this.ventasSeleccionadas = new Array<Venta>();
+        this.ventas2.forEach(element => {
+          let cadena = element.fecha.toString().slice(0, -14); 
+          var fecha = Date.parse(cadena)
+          var fechaDes = Date.parse(this.fechaDesde.toString());
+          var fechaHas = Date.parse(this.fechaHasta.toString());
+          if (fecha <= fechaHas && fecha > fechaDes){
+            this.precioNetoTotal = this.precioNetoTotal + element.pago.precioNeto;
+            this.precioTotalTotal = this.precioTotalTotal + element.pago.precioTotal;
+            this.ivaTotal = this.ivaTotal + element.pago.iva;
+            this.ventasSeleccionadas.push(element);
+          }
+        });
+        this.ventas = this.ventasSeleccionadas;
+      }else{
+        this.ventas = this.ventas2;
+        this.toastr.error("La fecha 'A:' no puede ser masyor a la fecha 'De:'", "OPERACION FALLIDA");
+      }
     }
   }
 
