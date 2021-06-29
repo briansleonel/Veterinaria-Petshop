@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Pago } from 'src/app/models/pago/pago';
+import { Tarjeta } from 'src/app/models/tarjeta/tarjeta';
 import { VentaService } from 'src/app/services/venta/venta.service';
 
 @Component({
@@ -12,15 +13,7 @@ import { VentaService } from 'src/app/services/venta/venta.service';
 export class SeleccionPagoComponent implements OnInit {
 
   pago: Pago;
-
-  tarjeta: {
-    nroTarjeta,
-    fullName,
-    fechaExpiracion,
-    codigoSeguridad,
-    dni
-  }
-
+  tarjeta : Tarjeta;
   constructor(
     private router: Router,
     private ventaService: VentaService,
@@ -29,16 +22,9 @@ export class SeleccionPagoComponent implements OnInit {
 
   ngOnInit(): void {
     this.pago = new Pago();
-    this.initTarjeta();
+    this.tarjeta = new Tarjeta();
   }
 
-  initTarjeta(): void {
-    this.tarjeta.nroTarjeta = '';
-    this.tarjeta.fullName = '';
-    this.tarjeta.fechaExpiracion = '';
-    this.tarjeta.codigoSeguridad = '';
-    this.tarjeta.dni = '';
-  }
 
   continuar(): void {
     if (this.pago.formaPago != undefined){
@@ -76,7 +62,7 @@ export class SeleccionPagoComponent implements OnInit {
   }
 
   isValidTarjeta(): boolean {
-    if(this.tarjeta.nroTarjeta == undefined && this.tarjeta.fullName == undefined && this.tarjeta.fechaExpiracion == undefined &&
+    if(this.tarjeta.numero == undefined && this.tarjeta.apellido == undefined && this.tarjeta.fechaExpiracion == undefined &&
     this.tarjeta.codigoSeguridad == undefined && this.tarjeta.dni == undefined)
       return false;
     else

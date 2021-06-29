@@ -5,11 +5,11 @@
         </div>
     </div>
     <div class="row">
-        <form class="container col-12 p-0 py-sm-5 px-sm-3 my-sm-0 m-0">
+        <form class="container col-12 p-0 py-sm-5 px-sm-3 my-sm-0 m-0" #formPago = "ngForm">
             <div class="row  px-3 px-sm-2 d-flex justify-content-evenly  m-0">
                 <div class="col-12 col-sm-3 bd-callout bd-callout-primary">
                     <div class="form-check m-0">
-                        <input class="form-check-input" type="radio" name="medioPago" id="efectivo" value="Efectivo" [(ngModel)]="pago.formaPago">
+                        <input class="form-check-input" required  type="radio" name="formaPago" id="efectivo" value="Efectivo" [(ngModel)]="pago.formaPago">
                         <label class="form-check-label" for="efectivo">
                             Efectivo al retirar
                         </label>
@@ -18,7 +18,7 @@
 
                 <div class="col-12 col-sm-3 bd-callout bd-callout-primary">
                     <div class="form-check m-0">
-                        <input class="form-check-input" type="radio" name="medioPago" id="tarjetaDebito" value="Tarjeta de débito" [(ngModel)]="pago.formaPago">
+                        <input class="form-check-input" required type="radio" name="formaPago" id="tarjetaDebito" value="Tarjeta de débito" [(ngModel)]="pago.formaPago">
                         <label class="form-check-label" for="tarjetaDebito">
                             Tarjeta de débito
                         </label>
@@ -26,7 +26,7 @@
                 </div>
                 <div class="col-12 col-sm-3 bd-callout bd-callout-primary">
                     <div class="form-check m-0">
-                        <input class="form-check-input" type="radio" name="medioPago" id="tarjetaCredito" value="Tarjeta de crédito" [(ngModel)]="pago.formaPago">
+                        <input class="form-check-input" required type="radio" name="formaPago" id="tarjetaCredito" value="Tarjeta de crédito" [(ngModel)]="pago.formaPago">
                         <label class="form-check-label" for="tarjetaCredito">
                             Tarjeta de crédito
                         </label>
@@ -35,51 +35,52 @@
             </div>
 
             <div *ngIf="pago.formaPago == 'Tarjeta de crédito' || pago.formaPago == 'Tarjeta de débito'" class="row  px-3 px-sm-2 d-flex justify-content-center  mt-4" >
-                <div class="col-12 col-sm-8 bd-callout bd-callout-primary">
+               
+                    <div class="col-12 col-sm-8 bd-callout bd-callout-primary">
                     <div class="col-12 m-0 row mb-3">
                         <label for="numTarjeta" class="form-label col-12 col-sm-3 m-0">Número de tarjeta</label>
                         <div class="col-12 col-sm-9">
-                            <input type="text" class="form-control form-control-sm" name="numTarjeta" id="numTarjeta" [(ngModel)]="tarjeta.nroTarjeta">
+                            <input type="text" class="form-control form-control-sm" name="numero"  id="numTarjeta" [(ngModel)]="tarjeta.numero">
                         </div>
                     </div>
                     <div class="col-12 m-0 row mb-3">
                         <label for="apellidoNombre" class="form-label col-12 col-sm-3 m-0">Apellido y nombre</label>
                         <div class="col-12 col-sm-9">
-                            <input type="text" class="form-control form-control-sm" name="apellidoNombre" id="apellidoNombre" [(ngModel)]="tarjeta.fullName">
+                            <input type="text" class="form-control form-control-sm" name="apellido"  id="apellidoNombre" [(ngModel)]="tarjeta.apellido">
                         </div>
                     </div>
                     <div class="col-12 m-0 row mb-3">
                         <label for="fechaExpiracion" class="form-label col-12 col-sm-3 m-0">Fecha de expiración</label>
                         <div class="col-12 col-sm-2">
-                            <input type="text" class="form-control form-control-sm" name="fechaExpiracion" id="fechaExpiracion" placeholder="MM/AA" [(ngModel)]="tarjeta.fechaExpiracion">
+                            <input type="text" class="form-control form-control-sm" name="fechaExpiracion"  id="fechaExpiracion" placeholder="MM/AA" [(ngModel)]="tarjeta.fechaExpiracion">
                         </div>
                         <label for="codigoSeguridad" class="form-label col-12 col-sm-4 m-0">Código de seguridad</label>
                         <div class="col-12 col-sm-3">
-                            <input type="text" class="form-control form-control-sm" name="codigoSeguridad" id="codigoSeguridad" [(ngModel)]="tarjeta.codigoSeguridad">
+                            <input type="text" class="form-control form-control-sm" name="codigoSeguridad"  id="codigoSeguridad" [(ngModel)]="tarjeta.codigoSeguridad">
                         </div>
                     </div>
                     <div class="col-12 m-0 row">
                         <label for="dniTitular" class="form-label col-12 col-sm-3 m-0">DNI de titular</label>
                         <div class="col-12 col-sm-9">
-                            <input type="text" class="form-control form-control-sm" name="dniTitular" id="dniTitular" [(ngModel)]="tarjeta.dni">
+                            <input type="text" class="form-control form-control-sm" required name="dni"  id="dniTitular" [(ngModel)]="tarjeta.dni">
                         </div>
+                        
                     </div>
-                    <!--
-                    <div class="col-12 m-0 row d-flex justify-content-evenly mt-4 mt-sm-5">
-                        <a class="btn btn-success btn-sm col-12 col-sm-3 mb-2 mb-sm-auto">Confirmar domicilio</a>
-                        <a class="btn btn-info btn-sm col-12 col-sm-3">Modificar domicilio</a>
-                    </div>
-                    -->
-                </div>
+                 </div>
+                 
+
+                
             </div>
+           
         </form>
     </div>
     <div class="row bg-dark  text-white p-3 d-flex justify-content-evenly">
         <a class="btn btn-danger btn-lg col-12 col-sm-4 my-2 my-sm-2" (click)="volver()">
             Volver
         </a>
-        <a class="btn btn-warning btn-lg col-12 col-sm-4 my-2 my-sm-2" (click)="continuar()">
+        <button [disabled] = "formPago.invalid" class="btn btn-warning btn-lg col-12 col-sm-4 my-2 my-sm-2" (click)="continuar()">
             Continuar
-        </a>
+        </button>
     </div>
+   
 </div>
