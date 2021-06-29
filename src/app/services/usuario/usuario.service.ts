@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Usuario } from 'src/app/models/usuario/usuario';
 
@@ -10,7 +11,8 @@ export class UsuarioService {
 
   urlBase:string= "http://localhost:3000/api/usuario/";
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { }
 
   public login(username: string, password: string): Observable<any> {
@@ -28,6 +30,7 @@ export class UsuarioService {
     sessionStorage.removeItem("user");
     sessionStorage.removeItem("rol");
     sessionStorage.removeItem("userId");
+    this.router.navigate(['home']);
   }
   public userLoggedIn() {
     var resultado = false;
