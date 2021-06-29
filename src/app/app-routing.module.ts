@@ -18,7 +18,8 @@ import { UsuarioformComponent } from './components/gestion/usuarioform/usuariofo
 import { ReportesComponent } from './components/gestion/reportes/reportes.component';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '', redirectTo:'home', pathMatch:'full'},
+  {path: 'home', component: HomeComponent},
   {path: 'tienda', component: CatalogoComponent},
   {path: 'tienda/product/:id', component: ProductoComponent},
   {path: 'carrito-compra', component: CarritoCompraComponent},

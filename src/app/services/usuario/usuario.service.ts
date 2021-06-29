@@ -42,7 +42,7 @@ export class UsuarioService {
     return usuario;
   }
   public idLogged() {
-    var id = sessionStorage.getItem("userid");
+    var id = sessionStorage.getItem("userId");
     return id;
   }
 
@@ -116,4 +116,12 @@ export class UsuarioService {
     }
     return this.http.get(this.urlBase + "validar/" + username, options);
   }
+
+  getUser(id: string): Observable<any> {
+    let options = {
+      headers: new HttpHeaders({}),
+      params: new HttpParams({})
+    }
+    return this.http.get(this.urlBase+id, options);
+  } 
 }

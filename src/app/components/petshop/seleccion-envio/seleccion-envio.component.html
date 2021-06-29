@@ -28,12 +28,12 @@
                 </div>
             </div>
             
-            <div class="row  px-3 px-sm-2 d-flex justify-content-center  m-0">
+            <div *ngIf="modoEnvio == 'Envío a domicilio'" class="row  px-3 px-sm-2 d-flex justify-content-center  m-0">
                 <div class="col-12 col-sm-11 mx-auto bd-callout bd-callout-primary">
                     <div class="col-12 m-0 row">
                         <label for="direccion" class="form-label col-12 col-sm-2 m-0">Tu dirección</label>
                         <div class="col-12 col-sm-10">
-                            <input type="text" class="form-control form-control-sm" id="direccion" placeholder="Tu dirección...">
+                            <input type="text" class="form-control form-control-sm" id="direccion" name="domicilio" placeholder="Tu dirección..." [(ngModel)]="domicilio">
                         </div>
                     </div>
                     <!--
