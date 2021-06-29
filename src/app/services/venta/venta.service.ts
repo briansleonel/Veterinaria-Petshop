@@ -35,7 +35,7 @@ export class VentaService {
     }
 
     const body = {
-      fecha : new Date(),
+      fecha : venta.fecha,
       medioEnvio : venta.medioEnvio,
       productos : this.cargarArrayProductos(venta.productos),
       pago : venta.pago,

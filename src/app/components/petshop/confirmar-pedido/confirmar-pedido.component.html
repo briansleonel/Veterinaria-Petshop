@@ -9,11 +9,12 @@
     <div class="row">
         <div class="container col-12 p-0 py-sm-5 px-sm-5 my-sm-0 m-0">
             <div class="row  p-3 p-sm-0 m-0">
-                <div class="table-responsive p-0">
-                    <table class="table table-hover bg-white rounded m-0">
+                <div class="table-responsive cont-table p-0">
+                    <table class="table table-hover bg-white align-middle rounded m-0">
                         <thead class="text-center">
                             <tr>
-                                <th scope="col">#</th>
+                                <!--
+                                <th scope="col">#</th> -->
                                 <th scope="col">Producto</th>
                                 <th scope="col">Descripción</th>
                                 <th scope="col">Precio</th>
@@ -21,7 +22,8 @@
                         </thead>
                         <tbody class="text-center">
                             <tr *ngFor = "let prod of venta.productos">
-                                <th>1</th>
+                                <!--
+                                <th>1</th> -->
                                 <td class="">{{prod.nombre}}</td>
                                 <td class="fw-light">{{prod.descripcion}}</td>
                                 <td class="fw-bold">${{prod.precioVenta}}</td>
@@ -32,7 +34,6 @@
                         <tbody class="text-center">
                             <tr>
                                 <td></td>
-                                <td></td>
                                 <th class="text-end">Forma de envío:</th>
                                 <td> {{venta.medioEnvio}} </td>
                             </tr>
@@ -40,14 +41,73 @@
                         <tbody class="text-center">
                             <tr>
                                 <td></td>
-                                <td></td>
                                 <th class="text-end">Medio de pago:</th>
                                 <td class=""> {{venta.pago.formaPago}} </td>
                             </tr>
                         </tbody>
                         <tfoot class="text-center">
                             <tr>
-                                <th scope="row" colspan="3" class="text-end">Total</th>
+                                <th scope="row" colspan="2" class="text-end">Total</th>
+                                <td class="fw-bold text-success fs-5">{{venta.pago.precioTotal | currency}} </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row d-none">
+        <div class="container col-12 p-0 py-sm-5 px-sm-5 my-sm-0 m-0">
+            <div id="ComprobantePago" class="row  p-3 p-sm-0 m-0">
+                <div class="col-12">
+                    <p class="text-end fst-italic">
+                        <span class="fw-light"> {{venta.fecha | date : 'dd/MM/yyyy hh:mm:ss a'}} </span>
+                    </p>
+                </div>
+                <div class="col-10 fs-1 mx-auto mt-2">
+                    <img class="w-100" src="../../../../assets/img/img-title-imprimir.png" alt="">
+                </div>
+                <div class="col-12 fs-5 mt-5">
+                    <p class="">
+                        Apellido y nombre: <span class="fw-bold"> {{user.apellido}}, {{user.nombre}} </span>
+                    </p>
+                    <p class="">
+                        Teléfono: <span class="fw-bold"> {{user.telefono}} </span>
+                    </p>
+                    <p class="">
+                        E-mail: <span class="fw-bold"> {{user.email}} </span>
+                    </p>
+                </div>
+
+                <div class="col-12 row m-0 mt-5">
+                    <div class="col-6">
+                        <p class="text-start">
+                            Forma de envío: <span class="fw-bold">{{venta.medioEnvio}}</span>
+                        </p>
+                    </div>
+                    <div class="col-6">
+                        <p class="text-start">
+                            Medio de pago: <span class="fw-bold">{{venta.pago.formaPago}}</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="table-responsive p-0 mt-3">
+                    <table class="table table-hover bg-white align-middle rounded m-0">
+                        <thead class="text-center ">
+                            <tr class="">
+                                <th scope="col">Producto</th>
+                                <th scope="col">Precio</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            <tr *ngFor = "let prod of venta.productos">
+                                <td class="">{{prod.nombre}}</td>
+                                <td class="fw-bold">${{prod.precioVenta}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot class="text-center">
+                            <tr>
+                                <th scope="row" colspan="1" class="text-end">Total</th>
                                 <td class="fw-bold text-success fs-5">{{venta.pago.precioTotal | currency}} </td>
                             </tr>
                         </tfoot>

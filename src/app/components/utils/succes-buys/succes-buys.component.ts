@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import * as printJS from 'print-js';
 
 @Component({
   selector: 'app-succes-buys',
@@ -18,6 +19,15 @@ export class SuccesBuysComponent implements OnInit {
 
   onClickNo(): void {
     this.dialogRef.close();
+  }
+
+  imprimir(): void {
+    printJS({
+      printable: 'ComprobantePago',
+      targetStyles: ['*'],
+      documentTitle: 'Comprobante de pago',
+      type: 'html'
+    })
   }
 
 }
