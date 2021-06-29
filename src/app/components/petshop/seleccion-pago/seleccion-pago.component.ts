@@ -51,8 +51,8 @@ export class SeleccionPagoComponent implements OnInit {
   continuarCompra(): void {
     this.ventaService.venta.pago = this.pago;
     this.calcularTotal();
-    this.ventaService.venta.pago.iva = 0;
-    this.ventaService.venta.pago.precioNeto = this.ventaService.venta.pago.precioTotal;
+    this.ventaService.venta.pago.iva = this.ventaService.venta.pago.precioTotal - (this.ventaService.venta.pago.precioTotal/1.21);
+    this.ventaService.venta.pago.precioNeto = this.ventaService.venta.pago.precioTotal/1.21;
     this.router.navigate(['carrito-compra/select-envio']);
   }
 
