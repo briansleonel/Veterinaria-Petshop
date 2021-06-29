@@ -66,7 +66,7 @@ export class ConfirmarPedidoComponent implements OnInit {
     this.ventaService.addVenta(this.venta, this.usuarioService.idLogged()).subscribe(
       (result) => {
         if(result.status == '1') {
-          console.log(result);
+          //console.log(result);
           this.ventaService.init();
           this.toastr.success("Se ha registrado su compra exitosamente")
         }
