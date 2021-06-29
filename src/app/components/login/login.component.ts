@@ -34,10 +34,13 @@ export class LoginComponent implements OnInit {
             sessionStorage.setItem("user", user.username);
             sessionStorage.setItem("userId", user.id);
             sessionStorage.setItem("rol", user.rol);
-
+            this.toastr.success("Bienvenido "+ sessionStorage.getItem("user") + " !!", "Inicio sesion exitoso");
             //redirigimos a home o a pagina que llamo
-            this.router.navigateByUrl(this.returnUrl);
-            this.toastr.success("Bienvenido "+ sessionStorage.getItem("user") + " !!", "Inicio sesion exitoso")
+            if(this.usuarioService.clientLogged())
+              this.router.navigate(['tienda']);
+            else
+              this.router.navigateByUrl(this.returnUrl);
+            
           } else {
             //usuario no encontrado muestro mensaje en la vista
             this.msglogin = "Credenciales incorrectas..";

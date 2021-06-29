@@ -7,9 +7,11 @@
 }
 .bg-logo h1 {
     font-size: 4vw;
-    color: rgb(24, 75, 141) ;
+    color: rgb(254, 212, 50) ;
     font-style: italic;
     font-weight: bolder;
+    text-shadow:  2px 2px 4px black ;
+    
 }
 .bg-side{
     background: url("../../../assets/home/side1.jpg");
