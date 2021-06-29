@@ -21,6 +21,7 @@ export class CategoriasComponent implements OnInit {
   mascotaSeleccionada: string;
   categoriaSeleccionada: string;
   categoriasSeleccionadas: Array<Categoria>;
+  vacio : boolean = false;
 
   constructor(private categoriaService: CategoriaService,
               private toastr: ToastrService,
@@ -107,9 +108,11 @@ export class CategoriasComponent implements OnInit {
         if(result.status=="1"){
           this.toastr.success("La categoría fue actualizada correctamente", "OPERACION EXITOSA");
           this.categoria = new Categoria();
+          this.vacio = false;
           this.cargarCategorias();
         }else{
-          this.toastr.error("Error al guardar la categoría", "OPERACION FALLIDA");
+          this.toastr.error("No pueden haber campos vacíos", "OPERACION FALLIDA");
+          this.vacio = true;
         }
       },
       error=>{
@@ -119,21 +122,28 @@ export class CategoriasComponent implements OnInit {
   }
 
   actualizarCategoria(){
-    this.categoriaService.updateCategoria(this.categoria).subscribe(
-      result=>{
-        if(result.status=="1"){
-          this.toastr.success("La categoría fue guardada correctamente", "OPERACION EXITOSA");
-          this.categoria = new Categoria();
-          this.cargarCategorias();
-          this.editar = false;
-        }else{
-          this.toastr.error("Error al actualizar la categoría", "OPERACION FALLIDA");
+    if(this.categoria.tipoMascota != "" && this.categoria.tipoProducto != ""){
+      this.categoriaService.updateCategoria(this.categoria).subscribe(
+        result=>{
+          if(result.status=="1"){
+            this.toastr.success("La categoría fue guardada correctamente", "OPERACION EXITOSA");
+            this.categoria = new Categoria();
+            this.vacio = false;
+            this.cargarCategorias();
+            this.editar = false;
+          }else{
+            this.toastr.error("No pueden haber campos vacíos", "OPERACION FALLIDA");
+            this.vacio = true;
+          }
+        },
+        error=>{
+          console.log(error);
         }
-      },
-      error=>{
-        console.log(error);
-      }
-    )
+      )
+    }else{
+      this.toastr.error("No pueden haber campos vacíos", "OPERACION FALLIDA");
+      this.vacio = true;
+    }
   }
 
   modificarCategoria(categoria:Categoria){

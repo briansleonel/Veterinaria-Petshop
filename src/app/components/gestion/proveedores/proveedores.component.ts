@@ -16,6 +16,7 @@ export class ProveedoresComponent implements OnInit {
   editar : boolean = false;
   proveedorSeleccionado: string;
   proveedores: Array<Proveedor>;
+  vacio : boolean = false;
 
   constructor(private proveedorService: ProveedorService,
               private toastr: ToastrService,
@@ -69,9 +70,11 @@ export class ProveedoresComponent implements OnInit {
         if(result.status=="1"){
           this.toastr.success("El proveedor fue guardado correctamente", "OPERACION EXITOSA");
           this.proveedor = new Proveedor();
+          this.vacio = false;
           this.cargarProveedores();
         }else{
-          this.toastr.error("Error al guardar el proveedor", "OPERACION FALLIDA");
+          this.toastr.error("No pueden haber campos vacíos", "OPERACION FALLIDA");
+          this.vacio = true;
         }
       },
       error=>{
@@ -81,21 +84,28 @@ export class ProveedoresComponent implements OnInit {
   }
 
   actualizarProveedor(){
-    this.proveedorService.updateProveedor(this.proveedor).subscribe(
-      result=>{
-        if(result.status=="1"){
-          this.toastr.success("El proveedor fue actualizado correctamente", "OPERACION EXITOSA");
-          this.proveedor = new Proveedor();
-          this.cargarProveedores();
-          this.editar = false;
-        }else{
-            this.toastr.error("Error al actualizar el proveedor", "OPERACION FALLIDA");
-          }
-      },
-      error=>{
-        console.log(error);
-      }
-    )
+    if(this.proveedor.nombre != "" && this.proveedor.direccion != "" && this.proveedor.email != "" && 
+    this.proveedor.telefono != ""){
+      this.proveedorService.updateProveedor(this.proveedor).subscribe(
+        result=>{
+          if(result.status=="1"){
+            this.toastr.success("El proveedor fue actualizado correctamente", "OPERACION EXITOSA");
+            this.proveedor = new Proveedor();
+            this.vacio = false;
+            this.cargarProveedores();
+            this.editar = false;
+          }else{
+            this.toastr.error("No pueden haber campos vacíos", "OPERACION FALLIDA");
+            }
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+    }else{
+      this.toastr.error("No pueden haber campos vacíos", "OPERACION FALLIDA");
+      this.vacio = true;
+    }
   }
 
   modificarProveedor(proveedor: Proveedor){
