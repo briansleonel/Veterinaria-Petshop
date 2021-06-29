@@ -89,7 +89,7 @@
                                                             </thead>
                                                             <tbody class="text-center">
                                                                 <tr *ngFor="let venta of mf.data">
-                                                                    <td>{{venta.fecha | date:"dd/MM/yyyy"}}</td>
+                                                                    <td>{{venta.fecha | date:"dd/MM/yy"}}</td>
                                                                     <td>{{venta.usuario.apellido}}, {{venta.usuario.nombre}} </td>
                                                                     <td>{{venta.pago.precioNeto | currency:"$"}}</td>
                                                                     <td>{{venta.pago.iva | currency:"$"}}</td>
@@ -133,7 +133,7 @@
             </div>
             
 
-            <div class="col-12 ">
+            <div *ngIf="tipoSeleccionado=='Ventas'" class="col-12 ">
                 <div class="p-md-2 mt-1 table-responsive min-vh-100">
                     <div id="formVentas">
                         <table class="table table-striped align-middle " [mfData]="ventas" #mf="mfDataTable"

@@ -141,8 +141,8 @@ export class ProductoformComponent implements OnInit {
   }
 
   modificarProducto(){
-    if(this.producto.categoria.tipoMascota != "" && this.producto.categoria.tipoProducto != "" && this.producto.codigo != ""
-    && this.producto.descripcion != "" && this.producto.fechaRecepcion != null && this.producto.fechaVencimiento != null
+    if(this.producto.categoria.tipoMascota != "" && this.producto.categoria.tipoProducto != "" && 
+    this.producto.codigo != "" && this.producto.descripcion != "" && this.producto.fechaRecepcion != null
     && this.producto.img != "" && this.producto.nombre != "" && this.producto.precioCompra != null &&
     this.producto.precioVenta != null && this.producto.stock != null){
         this.categoriaService.getCategoriaByTipos(this.categoriaFinal).subscribe(
