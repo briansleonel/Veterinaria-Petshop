@@ -1,4 +1,8 @@
+import { ContentObserver } from '@angular/cdk/observers';
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { Venta } from 'src/app/models/venta/venta';
+import { VentaService } from 'src/app/services/venta/venta.service';
 
 @Component({
   selector: 'app-reportes',
@@ -7,9 +11,76 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportesComponent implements OnInit {
 
-  constructor() { }
+  
+  tipoSeleccionado: string = "";
+  fechaDesde: Date;
+  fechaHasta: Date;
+  ventas: Array<Venta>;
+  ventas2: Array<Venta>;
+  ventasSeleccionadas: Array<Venta>;
+  fecha: Date= new Date();
+
+  constructor(
+              private ventaService: VentaService,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
+    this.iniciarVariables();
+    this.cargarVentas();
+  }
+
+  iniciarVariables(){
+    this.ventas = new Array<Venta>();
+    this.ventas2 = new Array<Venta>();
+    this.ventasSeleccionadas = new Array<Venta>();
+    this.tipoSeleccionado = "";
+    this.fechaDesde = null;
+    this.fechaHasta = null;
+  }
+
+  cargarVentas(){
+    this.ventas = new Array<Venta>();
+    this.ventaService.getVentas().subscribe(
+      result=>{
+        result.forEach(element => {
+          let vVenta = new Venta();
+          Object.assign(vVenta, element);
+          this.ventas.push(vVenta);
+          this.ventas2.push(vVenta);
+        });
+      },
+      error=>{
+        console.log(error);
+        alert("Error al cargar ventas");
+      }
+    )
+  }
+
+  limpiarFiltros(){
+    this.iniciarVariables();
+    this.cargarVentas();
+  }
+
+  filtrarFechas(){
+    if (this.fechaDesde <= this.fechaHasta){
+      this.ventasSeleccionadas = new Array<Venta>();
+      this.ventas2.forEach(element => {
+        let cadena = element.fecha.toString().slice(0, -14); 
+        var fecha = Date.parse(cadena)
+        var fechaDes = Date.parse(this.fechaDesde.toString());
+        var fechaHas = Date.parse(this.fechaHasta.toString());
+        if (fecha < fechaHas && fecha > fechaDes){
+          this.ventasSeleccionadas.push(element);
+        }
+      });
+      this.ventas = this.ventasSeleccionadas;
+    }else{
+      this.ventas = this.ventas2;
+    }
+  }
+
+  generarInforme(){
+
   }
 
 }

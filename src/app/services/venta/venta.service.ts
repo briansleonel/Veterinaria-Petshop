@@ -44,4 +44,12 @@ export class VentaService {
     return this._http.post(this.urlBase, body, httpOptions);
   }
 
+  getVentas():Observable<any>{
+    let options = {
+      headers:new HttpHeaders({}),
+      params: new HttpParams({})
+    }
+    return this._http.get(this.urlBase,options);
+  }
+
 }
