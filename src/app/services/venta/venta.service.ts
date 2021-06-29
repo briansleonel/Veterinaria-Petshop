@@ -28,7 +28,7 @@ export class VentaService {
     //this.listaProductos = new Array<Producto>();
   }
 
-  addVenta(venta: Venta): Observable<any> {
+  addVenta(venta: Venta, idUser: string): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders(),
       params: new HttpParams()
@@ -37,10 +37,11 @@ export class VentaService {
     const body = {
       fecha : new Date(),
       medioEnvio : venta.medioEnvio,
-      productos : venta.productos,
-      pago : venta.pago
+      productos : this.cargarArrayProductos(venta.productos),
+      pago : venta.pago,
+      usuario : idUser
     }
-
+    console.log(body)
     return this._http.post(this.urlBase, body, httpOptions);
   }
 
@@ -50,6 +51,16 @@ export class VentaService {
       params: new HttpParams({})
     }
     return this._http.get(this.urlBase,options);
+  }
+
+  cargarArrayProductos(productos: Array<Producto>): Array<string> {
+    let ids = new Array<string>();
+    productos.forEach(
+      (element) => {
+        ids.push(element._id);
+      }
+    )
+    return ids;
   }
 
 }

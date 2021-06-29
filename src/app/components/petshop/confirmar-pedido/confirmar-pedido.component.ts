@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Producto } from 'src/app/models/producto/producto';
 import { VentaService } from 'src/app/services/venta/venta.service';
 import { SuccesBuysComponent } from '../../utils/succes-buys/succes-buys.component';
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 
 @Component({
   selector: 'app-confirmar-pedido',
@@ -20,7 +21,8 @@ export class ConfirmarPedidoComponent implements OnInit {
   constructor(
     private router: Router,
     private dialog: MatDialog,
-    private ventaService: VentaService
+    private ventaService: VentaService,
+    private usuarioService: UsuarioService
   ) { }
 
   ngOnInit(): void {
@@ -40,8 +42,17 @@ export class ConfirmarPedidoComponent implements OnInit {
         this.router.navigate(['tienda'])
       }
     )
-    this.ventaService.addVenta(this.venta);
-    this.ventaService.init();
+    this.realizarVenta();
+  }
+
+  realizarVenta(): void {
+    this.ventaService.addVenta(this.venta, this.usuarioService.idLogged()).subscribe(
+      (result) => {
+        console.log(result);
+        this.ventaService.init();
+      }
+    );
+    
   }
 
   volver(): void {

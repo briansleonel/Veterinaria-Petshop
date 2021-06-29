@@ -39,11 +39,8 @@ export class CatalogoComponent implements OnInit {
         result.forEach(element => {
           let producto = new Producto();
           Object.assign(producto, element);
-          console.log(element);
-          console.log(producto);
           this.productos.push(producto);
         });
-        console.log(this.productos)
       },
       error=>{
         console.log(error);
@@ -63,10 +60,10 @@ export class CatalogoComponent implements OnInit {
 
   filterByTypeMascota(event): void {
     this.filterTypeMascota = event;
-    console.log("Filter:" ,this.filterTypeMascota)
+    //console.log("Filter:" ,this.filterTypeMascota)
     let encontrados = Array<Producto>();
     this.productos.forEach(element => {
-      console.log("Element: ",element.categoria.tipoMascota)
+      //console.log("Element: ",element.categoria.tipoMascota)
       if(element.categoria.tipoMascota == this.filterTypeMascota)
         encontrados.push(element);
     })
