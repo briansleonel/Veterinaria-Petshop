@@ -34,8 +34,6 @@ export class ProductoComponent implements OnInit {
       this.productoService.getProducto(params.id).subscribe(
         result=>{
           Object.assign(this.producto, result);
-          console.log(result);
-          console.log(this.producto);
         },
         error=>{
           console.log(error);

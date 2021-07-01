@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Categoria } from 'src/app/models/categoria/categoria';
 import { Producto } from 'src/app/models/producto/producto';
+import { CategoriaService } from 'src/app/services/categoria/categoria.service';
 import { ProductoService } from 'src/app/services/producto/producto.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { VentaService } from 'src/app/services/venta/venta.service';
@@ -20,12 +22,17 @@ export class CatalogoComponent implements OnInit {
   filterTypeProducto: string;
   filterTypeMascota: string;
 
+  categorias: Array<Categoria>;
+  tiposProductos: Array<string>;
+  tiposMascota: Array<string>;
+
   constructor(
     private productoService: ProductoService,
     private ventaService: VentaService,
     private toastr: ToastrService,
     private usuarioService: UsuarioService,
-    private router : Router
+    private router : Router,
+    private categoriaService: CategoriaService
   ) { }
 
   ngOnInit(): void {
@@ -34,6 +41,7 @@ export class CatalogoComponent implements OnInit {
     this.filterTypeProducto = '';
     this.filterTypeMascota = '';
     this.cargarCatalogoProductos();
+    this.cargarCategorias();
   }
 
   cargarCatalogoProductos():void{
@@ -92,7 +100,31 @@ export class CatalogoComponent implements OnInit {
       this.toastr.error("El tipo de usuario no es conocido por el sistema","Error de autenticacion");
       this.router.navigate(['home']);
     }
-    
+  }
+
+  cargarCategorias(){
+    this.categorias = new Array<Categoria>();
+    this.tiposProductos = new Array<string>();
+    this.tiposMascota = new Array<string>();
+    this.categoriaService.getCategorias().subscribe(
+      result=>{
+        result.forEach(element => {
+          let vCategoria = new Categoria();
+          Object.assign(vCategoria, element);
+          this.categorias.push(vCategoria);
+          if (this.tiposProductos.indexOf(vCategoria.tipoProducto) == -1){
+              this.tiposProductos.push(vCategoria.tipoProducto);   
+          }
+          if (this.tiposMascota.indexOf(vCategoria.tipoMascota) == -1){
+            this.tiposMascota.push(vCategoria.tipoMascota);
+          }
+        });
+      },
+      error=>{
+        console.log(error);
+        alert("Error al cargar Categorias");
+      }
+    )
   }
 
 }

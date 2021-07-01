@@ -29,10 +29,7 @@
                     <label for="filterTypeProducto" class="form-label">Tipo de producto</label>
                     <select id="filterTypeProducto" name="filterTypeProducto" class="form-select form-select-sm" (ngModelChange) ="filterByTypeProduct($event)" [(ngModel)]="filterTypeProducto">
                         <option value="" selected></option>
-                        <option value="Alimentos">Alimentos</option>
-                        <option value="Accesorios">Accesorios</option>
-                        <option value="Estética e higiene">Estética e higiene</option>
-                        <option value="Salud">Salud</option>
+                        <option *ngFor="let tipoProducto of tiposProductos" [ngValue]="tipoProducto">{{tipoProducto}}</option>
                         
                     </select>
                 </div>
@@ -41,9 +38,7 @@
                     <label for="filterTypeMascota" class="form-label">Mascota</label>
                     <select id="filterTypeMascota" name="filterTypeMascota" class="form-select form-select-sm" (ngModelChange) ="filterByTypeMascota($event)" [(ngModel)]="filterTypeMascota">
                         <option value="" selected></option>
-                        <option value="Perro">Perro</option>
-                        <option value="Gato">Gato</option>
-                        <option value="Otros">Otros</option>
+                        <option *ngFor="let tipoMascota of tiposMascota" [ngValue]="tipoMascota">{{tipoMascota}}</option>
                     </select>
                 </div>
             </form>
