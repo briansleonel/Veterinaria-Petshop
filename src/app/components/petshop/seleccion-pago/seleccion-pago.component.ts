@@ -27,10 +27,19 @@ export class SeleccionPagoComponent implements OnInit {
 
 
   continuar(): void {
-    if (this.pago.formaPago != undefined){
-        this.continuarCompra();
+    console.log(this.pago.formaPago)
+    if (this.pago.formaPago != undefined && this.pago.formaPago == "Efectivo"){
+      this.continuarCompra();
     } else {
-      this.toastr.warning("Debe seleccionar una forma de pago", '¡ATENCIÓN!')
+      if(this.pago.formaPago == undefined){
+        this.toastr.warning("Debe seleccionar una forma de pago", '¡ATENCIÓN!')
+      }else{
+        if(this.isValidTarjeta() == false){
+          this.toastr.error("No pueden haber campos vacíos", 'ERROR TARJETA')
+        }else{
+            this.continuarCompra();
+        }
+      }
     }
   }
 
@@ -62,8 +71,8 @@ export class SeleccionPagoComponent implements OnInit {
   }
 
   isValidTarjeta(): boolean {
-    if(this.tarjeta.numero == undefined && this.tarjeta.apellido == undefined && this.tarjeta.fechaExpiracion == undefined &&
-    this.tarjeta.codigoSeguridad == undefined && this.tarjeta.dni == undefined)
+    if(this.tarjeta.numero == undefined || this.tarjeta.apellido == undefined || this.tarjeta.fechaExpiracion == undefined ||
+    this.tarjeta.codigoSeguridad == undefined || this.tarjeta.dni == undefined)
       return false;
     else
       return true;

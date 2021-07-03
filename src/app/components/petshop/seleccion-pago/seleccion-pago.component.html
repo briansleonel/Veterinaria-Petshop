@@ -5,7 +5,7 @@
         </div>
     </div>
     <div class="row">
-        <form class="container col-12 p-0 py-sm-5 px-sm-3 my-sm-0 m-0" #formPago = "ngForm">
+        <form class="container col-12 p-0 py-sm-5 px-sm-3 my-sm-0 m-0">
             <div class="row  px-3 px-sm-2 d-flex justify-content-evenly  m-0">
                 <div class="col-12 col-sm-3 bd-callout bd-callout-primary">
                     <div class="form-check m-0">
@@ -40,7 +40,7 @@
                     <div class="col-12 m-0 row mb-3">
                         <label for="numTarjeta" class="form-label col-12 col-sm-3 m-0">Número de tarjeta</label>
                         <div class="col-12 col-sm-9">
-                            <input type="text" class="form-control form-control-sm" name="numero"  id="numTarjeta" [(ngModel)]="tarjeta.numero">
+                            <input type="number" class="form-control form-control-sm" name="numero"  id="numTarjeta" [(ngModel)]="tarjeta.numero">
                         </div>
                     </div>
                     <div class="col-12 m-0 row mb-3">
@@ -56,13 +56,13 @@
                         </div>
                         <label for="codigoSeguridad" class="form-label col-12 col-sm-4 m-0">Código de seguridad</label>
                         <div class="col-12 col-sm-3">
-                            <input type="text" class="form-control form-control-sm" name="codigoSeguridad"  id="codigoSeguridad" [(ngModel)]="tarjeta.codigoSeguridad">
+                            <input type="number" class="form-control form-control-sm" name="codigoSeguridad"  id="codigoSeguridad" [(ngModel)]="tarjeta.codigoSeguridad">
                         </div>
                     </div>
                     <div class="col-12 m-0 row">
                         <label for="dniTitular" class="form-label col-12 col-sm-3 m-0">DNI de titular</label>
                         <div class="col-12 col-sm-9">
-                            <input type="text" class="form-control form-control-sm" required name="dni"  id="dniTitular" [(ngModel)]="tarjeta.dni">
+                            <input type="number" maxlength="8" class="form-control form-control-sm" required name="dni"  id="dniTitular" [(ngModel)]="tarjeta.dni">
                         </div>
                         
                     </div>
@@ -78,7 +78,7 @@
         <a class="btn btn-danger btn-lg col-12 col-sm-4 my-2 my-sm-2" (click)="volver()">
             Volver
         </a>
-        <button [disabled] = "formPago.invalid" class="btn btn-warning btn-lg col-12 col-sm-4 my-2 my-sm-2" (click)="continuar()">
+        <button class="btn btn-warning btn-lg col-12 col-sm-4 my-2 my-sm-2" (click)="continuar()">
             Continuar
         </button>
     </div>

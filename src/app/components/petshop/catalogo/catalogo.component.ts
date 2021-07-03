@@ -16,6 +16,7 @@ import { VentaService } from 'src/app/services/venta/venta.service';
 export class CatalogoComponent implements OnInit {
 
   productos: Array<Producto>;
+  productos2: Array<Producto>;
   page:number;
   findNameProd : string;
   findCodigoProd: string;
@@ -45,13 +46,16 @@ export class CatalogoComponent implements OnInit {
   }
 
   cargarCatalogoProductos():void{
+    this.cleanFilters(1);
     this.productos = new Array<Producto>();
+    this.productos2 = new Array<Producto>();
     this.productoService.get(this.findNameProd, this.findCodigoProd).subscribe(
       result=>{
         result.forEach(element => {
           let producto = new Producto();
           Object.assign(producto, element);
           this.productos.push(producto);
+          this.productos2.push(producto);
         });
       },
       error=>{
@@ -61,9 +65,10 @@ export class CatalogoComponent implements OnInit {
   }
 
   filterByTypeProduct(event): void {
+    this.cleanFilters(2);
     this.filterTypeProducto = event;
     let encontrados = Array<Producto>();
-    this.productos.forEach(element => {
+    this.productos2.forEach(element => {
       if(element.categoria.tipoProducto == this.filterTypeProducto)
         encontrados.push(element);
     })
@@ -71,10 +76,11 @@ export class CatalogoComponent implements OnInit {
   }
 
   filterByTypeMascota(event): void {
+    this.cleanFilters(3);
     this.filterTypeMascota = event;
     //console.log("Filter:" ,this.filterTypeMascota)
     let encontrados = Array<Producto>();
-    this.productos.forEach(element => {
+    this.productos2.forEach(element => {
       //console.log("Element: ",element.categoria.tipoMascota)
       if(element.categoria.tipoMascota == this.filterTypeMascota)
         encontrados.push(element);
@@ -82,11 +88,11 @@ export class CatalogoComponent implements OnInit {
     this.productos = encontrados;
   }
 
-  cleanFilters(): void {
-    this.findNameProd = '';
-    this.filterTypeProducto = '';
-    this.filterTypeMascota = '';
-    this.cargarCatalogoProductos();
+  cleanFilters(opcion: number): void {
+    if(opcion != 1){this.findNameProd = '';}
+    if(opcion != 2){this.filterTypeProducto = '';}
+    if(opcion != 3){this.filterTypeMascota = '';}
+    if(opcion == 0){this.cargarCatalogoProductos();}
   }
 
   addProductToCart(prod:Producto):void{
