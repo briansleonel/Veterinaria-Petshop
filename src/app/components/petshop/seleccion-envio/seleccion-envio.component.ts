@@ -45,7 +45,7 @@ export class SeleccionEnvioComponent implements OnInit {
         if(this.domicilio != '') {
           this.save();
         } else {
-          this.toastr.warning('No se ingresó un domicilio', '¡ATENCIÓN!')
+          this.toastr.warning('Debe ingresar un domicilio', '¡ATENCIÓN!')
         }
       }
       

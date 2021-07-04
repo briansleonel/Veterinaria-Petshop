@@ -9,6 +9,7 @@ import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import * as printJS from 'print-js';
 import { Usuario } from 'src/app/models/usuario/usuario';
 import { ToastrService } from 'ngx-toastr';
+import { ProductoService } from 'src/app/services/producto/producto.service';
 
 @Component({
   selector: 'app-confirmar-pedido',
@@ -30,7 +31,8 @@ export class ConfirmarPedidoComponent implements OnInit {
     private dialog: MatDialog,
     private ventaService: VentaService,
     private usuarioService: UsuarioService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private productoService: ProductoService
   ) { }
 
   ngOnInit(): void {
@@ -52,6 +54,7 @@ export class ConfirmarPedidoComponent implements OnInit {
           console.log("Descargar comprobante ", res);
         }
         this.router.navigate(['tienda']);
+        this.ventaService.init();
       }
     )
   }
@@ -67,8 +70,9 @@ export class ConfirmarPedidoComponent implements OnInit {
       (result) => {
         if(result.status == '1') {
           //console.log(result);
-          this.ventaService.init();
-          this.toastr.success("Se ha registrado su compra exitosamente")
+          this.actualizarStock();
+          //this.ventaService.init();
+          this.toastr.success("Se ha registrado su compra exitosamente");
         }
       }
     );
@@ -86,6 +90,32 @@ export class ConfirmarPedidoComponent implements OnInit {
         //console.log(this.user);
       }
     )
+  }
+
+  actualizarStock() {
+    this.venta.productos.forEach(
+      (element) => {
+        this.productoService.getProducto(element._id).subscribe(
+          async result => {
+            let prod = new Producto();
+            Object.assign(prod, result);
+            --prod.stock;
+            await this.update(prod);
+          }
+        );
+      }
+    )
+  }
+
+  update(prod: Producto) {
+    return new Promise((resolve, reject) => {
+      this.productoService.updateProducto(prod).subscribe(
+        res => {
+          if(res.status == '1')
+           console.log("Stock actualizado")
+        }
+      );
+    })
   }
 
 }
