@@ -9,7 +9,7 @@
             <div class="row  px-3 px-sm-2 d-flex justify-content-evenly  m-0">
                 <div class="col-12 col-sm-3 bd-callout bd-callout-primary">
                     <div class="form-check m-0">
-                        <input class="form-check-input" required  type="radio" name="formaPago" id="efectivo" value="Efectivo" [(ngModel)]="pago.formaPago">
+                        <input (click)="limpiarFormTarjeta()" class="form-check-input" required  type="radio" name="formaPago" id="efectivo" value="Efectivo" [(ngModel)]="pago.formaPago">
                         <label class="form-check-label" for="efectivo">
                             Efectivo al retirar
                         </label>
@@ -18,7 +18,7 @@
 
                 <div class="col-12 col-sm-3 bd-callout bd-callout-primary">
                     <div class="form-check m-0">
-                        <input class="form-check-input" required type="radio" name="formaPago" id="tarjetaDebito" value="Tarjeta de débito" [(ngModel)]="pago.formaPago">
+                        <input (click)="limpiarFormTarjeta()" class="form-check-input" required type="radio" name="formaPago" id="tarjetaDebito" value="Tarjeta de débito" [(ngModel)]="pago.formaPago">
                         <label class="form-check-label" for="tarjetaDebito">
                             Tarjeta de débito
                         </label>
@@ -26,7 +26,7 @@
                 </div>
                 <div class="col-12 col-sm-3 bd-callout bd-callout-primary">
                     <div class="form-check m-0">
-                        <input class="form-check-input" required type="radio" name="formaPago" id="tarjetaCredito" value="Tarjeta de crédito" [(ngModel)]="pago.formaPago">
+                        <input (click)="limpiarFormTarjeta()" class="form-check-input" required type="radio" name="formaPago" id="tarjetaCredito" value="Tarjeta de crédito" [(ngModel)]="pago.formaPago">
                         <label class="form-check-label" for="tarjetaCredito">
                             Tarjeta de crédito
                         </label>
@@ -40,29 +40,56 @@
                     <div class="col-12 m-0 row mb-3">
                         <label for="numTarjeta" class="form-label col-12 col-sm-3 m-0">Número de tarjeta</label>
                         <div class="col-12 col-sm-9">
-                            <input type="number" class="form-control form-control-sm" name="numero"  id="numTarjeta" [(ngModel)]="tarjeta.numero">
+                            <input type="text" maxlength="18" minlength="16" class="form-control form-control-sm" name="numero"  id="numTarjeta" [(ngModel)]="tarjeta.numero">
+                            <div *ngIf="(tarjeta.numero == '' || tarjeta.numero == null) && vacio==true" class=" m-0 p-0 alert alert-danger align-items-center">
+                                <p class="m-auto" style="font-size: 12px;">*Campo requerido</p>
+                            </div>
+                            <div *ngIf="errorNumero==true" class=" m-0 p-0 alert alert-danger align-items-center">
+                                <p class="m-auto" style="font-size: 12px;">*Ingrese mínimo 16 dígitos</p>
+                            </div>
                         </div>
                     </div>
                     <div class="col-12 m-0 row mb-3">
                         <label for="apellidoNombre" class="form-label col-12 col-sm-3 m-0">Apellido y nombre</label>
                         <div class="col-12 col-sm-9">
                             <input type="text" class="form-control form-control-sm" name="apellido"  id="apellidoNombre" [(ngModel)]="tarjeta.apellido">
+                            <div *ngIf="(tarjeta.apellido == '' || tarjeta.apellido == null) && vacio==true" class=" m-0 p-0 alert alert-danger align-items-center">
+                                <p class="m-auto" style="font-size: 12px;">*Campo requerido</p>
+                            </div>
                         </div>
                     </div>
                     <div class="col-12 m-0 row mb-3">
                         <label for="fechaExpiracion" class="form-label col-12 col-sm-3 m-0">Fecha de expiración</label>
-                        <div class="col-12 col-sm-2">
-                            <input type="text" class="form-control form-control-sm" name="fechaExpiracion"  id="fechaExpiracion" placeholder="MM/AA" [(ngModel)]="tarjeta.fechaExpiracion">
-                        </div>
-                        <label for="codigoSeguridad" class="form-label col-12 col-sm-4 m-0">Código de seguridad</label>
                         <div class="col-12 col-sm-3">
-                            <input type="number" class="form-control form-control-sm" name="codigoSeguridad"  id="codigoSeguridad" [(ngModel)]="tarjeta.codigoSeguridad">
+                            <input type="text" maxlength="5" minlength="5" class="form-control form-control-sm" name="fechaExpiracion"  id="fechaExpiracion" placeholder="MM/AA" [(ngModel)]="tarjeta.fechaExpiracion">
+                            <div *ngIf="(tarjeta.fechaExpiracion == '' || tarjeta.fechaExpiracion == null) && vacio==true" class=" m-0 p-0 alert alert-danger align-items-center">
+                                <p class="m-auto" style="font-size: 12px;">*Campo requerido</p>
+                            </div>
+                            <div *ngIf="errorFecha==true" class=" m-0 p-0 alert alert-danger align-items-center">
+                                <p class="m-auto" style="font-size: 12px;">*Ingrese fecha MM/AA</p>
+                            </div>
+                        </div>
+                        <label for="codigoSeguridad" class="form-label col-12 col-sm-3 m-0">Código de seguridad</label>
+                        <div class="col-12 col-sm-3">
+                            <input type="text" maxlength="3" minlength="3" class="form-control form-control-sm" name="codigoSeguridad"  id="codigoSeguridad" [(ngModel)]="tarjeta.codigoSeguridad">
+                            <div *ngIf="(tarjeta.codigoSeguridad == '' || tarjeta.codigoSeguridad == null) && vacio==true" class=" m-0 p-0 alert alert-danger align-items-center">
+                                <p class="m-auto" style="font-size: 12px;">*Campo requerido</p>
+                            </div>
+                            <div *ngIf="errorCodigo==true" class=" m-0 p-0 alert alert-danger align-items-center">
+                                <p class="m-auto" style="font-size: 12px;">*Ingrese 3 dígitos</p>
+                            </div>
                         </div>
                     </div>
                     <div class="col-12 m-0 row">
                         <label for="dniTitular" class="form-label col-12 col-sm-3 m-0">DNI de titular</label>
                         <div class="col-12 col-sm-9">
-                            <input type="number" maxlength="8" class="form-control form-control-sm" required name="dni"  id="dniTitular" [(ngModel)]="tarjeta.dni">
+                            <input type="text" maxlength="8" minlength="6" class="form-control form-control-sm" required name="dni"  id="dniTitular" [(ngModel)]="tarjeta.dni">
+                            <div *ngIf="(tarjeta.dni == '' || tarjeta.dni == null) && vacio==true" class=" m-0 p-0 alert alert-danger align-items-center">
+                                <p class="m-auto" style="font-size: 12px;">*Campo requerido</p>
+                            </div>
+                            <div *ngIf="errorDni==true" class=" m-0 p-0 alert alert-danger align-items-center">
+                                <p class="m-auto" style="font-size: 12px;">*Ingrese mínimo 6 dígitos</p>
+                            </div>
                         </div>
                         
                     </div>

@@ -59,7 +59,6 @@ export class ConfirmarPedidoComponent implements OnInit {
   }
 
   cargarDatosVenta(){
-    this.venta.pago.precioNeto = this.venta.pago.precioTotal;
     this.venta.fecha = new Date();
     this.realizarVenta();
     //this.ventaService.init();

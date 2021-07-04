@@ -1,3 +1,4 @@
+import { NumberFormatStyle } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -14,6 +15,12 @@ export class SeleccionPagoComponent implements OnInit {
 
   pago: Pago;
   tarjeta : Tarjeta;
+  vacio : boolean = false;
+  errorCodigo: boolean = false;
+  errorDni: boolean = false;
+  errorNumero: boolean = false;
+  errorFecha: boolean = false;
+  
   constructor(
     private router: Router,
     private ventaService: VentaService,
@@ -36,8 +43,12 @@ export class SeleccionPagoComponent implements OnInit {
       }else{
         if(this.isValidTarjeta() == false){
           this.toastr.error("No pueden haber campos vacíos", 'ERROR TARJETA')
-        }else{
-            this.continuarCompra();
+        }
+        if(this.isValidTarjetaCampos() == false){
+          this.toastr.error("Campos erróneos en la tarjeta", 'ERROR TARJETA')
+        }
+        if(this.isValidTarjetaCampos() == true && this.isValidTarjeta() == true){
+          this.continuarCompra();
         }
       }
     }
@@ -72,10 +83,70 @@ export class SeleccionPagoComponent implements OnInit {
 
   isValidTarjeta(): boolean {
     if(this.tarjeta.numero == undefined || this.tarjeta.apellido == undefined || this.tarjeta.fechaExpiracion == undefined ||
-    this.tarjeta.codigoSeguridad == undefined || this.tarjeta.dni == undefined)
+    this.tarjeta.codigoSeguridad == undefined || this.tarjeta.dni == undefined){
+      this.vacio = true;
       return false;
-    else
+  }else
       return true;
   }
 
+  iniciarErrores(){
+    this.errorCodigo = false;
+    this.errorDni = false;
+    this.errorNumero = false;
+    this.errorFecha = false;
+  }
+
+  limpiarFormTarjeta(){
+    this.tarjeta = new Tarjeta();
+    this.vacio = false;
+    this.iniciarErrores();
+  }
+
+  isValidTarjetaCampos(): boolean{
+    this.iniciarErrores();
+    if(this.tarjeta.codigoSeguridad != undefined && (this.tarjeta.codigoSeguridad.length != 3 || this.esNumero(this.tarjeta.codigoSeguridad) == false)){
+      this.errorCodigo = true;
+    }
+    if(this.tarjeta.dni != undefined && (this.tarjeta.dni.length < 6 || this.esNumero(this.tarjeta.dni) == false)){
+      this.errorDni = true;
+    }
+    if(this.tarjeta.numero != undefined && (this.tarjeta.numero.length < 16 || this.esNumero(this.tarjeta.numero) == false)){
+      this.errorNumero = true;
+    }
+    if(this.tarjeta.fechaExpiracion != undefined && (this.tarjeta.fechaExpiracion.length != 5 || this.esFecha(this.tarjeta.fechaExpiracion) == false)){
+      this.errorFecha = true;
+    }
+    if(this.errorCodigo == false && this.errorDni == false && this.errorNumero == false && this.errorFecha == false){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  esNumero(cadena: string){
+    let esNumero = true;
+    for(var i=0; i < cadena.length && esNumero == true; i++){
+      if(/^[0-9 ]*$/.test(cadena[i]) == false){
+        esNumero = false;
+      }
+    }
+    return esNumero;
+  }
+
+  esFecha(cadena: string){
+    let esFecha = true;
+    for(var i=0; i < cadena.length && esFecha == true; i++){
+      if(i == 2){
+        if(cadena[i] != "/"){
+          esFecha = false;
+        }
+      }else{
+        if(/^[0-9 ]*$/.test(cadena[i]) == false){
+          esFecha = false;
+        }
+      } 
+    }
+    return esFecha;
+  }
 }
