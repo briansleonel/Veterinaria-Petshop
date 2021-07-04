@@ -54,29 +54,28 @@ export class ConfirmarPedidoComponent implements OnInit {
           console.log("Descargar comprobante ", res);
         }
         this.router.navigate(['tienda']);
-        this.ventaService.init();
       }
     )
   }
 
-  cargarDatosVenta(): void{
+  cargarDatosVenta(){
     this.venta.pago.precioNeto = this.venta.pago.precioTotal;
     this.venta.fecha = new Date();
     this.realizarVenta();
+    //this.ventaService.init();
   }
 
-  realizarVenta(): void {
-    this.ventaService.addVenta(this.venta, this.usuarioService.idLogged()).subscribe(
-      (result) => {
-        if(result.status == '1') {
-          //console.log(result);
-          this.actualizarStock();
-          //this.ventaService.init();
-          this.toastr.success("Se ha registrado su compra exitosamente");
-        }
-      }
-    );
-    
+  realizarVenta() {
+        this.ventaService.addVenta(this.venta, this.usuarioService.idLogged()).subscribe(
+          async (result) => {
+            if(result.status == '1') {
+              //console.log(result);
+              await this.actualizarStock();
+              this.ventaService.init();
+              this.toastr.success("Se ha registrado su compra exitosamente");
+            }
+          }
+        )
   }
 
   volver(): void {
@@ -93,28 +92,32 @@ export class ConfirmarPedidoComponent implements OnInit {
   }
 
   actualizarStock() {
-    this.venta.productos.forEach(
-      (element) => {
-        this.productoService.getProducto(element._id).subscribe(
-          async result => {
-            let prod = new Producto();
-            Object.assign(prod, result);
-            --prod.stock;
-            await this.update(prod);
+    return new Promise((resolve, reject) => {
+      resolve(
+        this.venta.productos.forEach(
+          (element) => {
+            this.productoService.getProducto(element._id).subscribe(
+              async result => {
+                let prod = new Producto();
+                Object.assign(prod, result);
+                --prod.stock;
+                await this.update(prod);
+              }
+            );
           }
-        );
-      }
-    )
+        )
+      )
+    });
   }
 
   update(prod: Producto) {
     return new Promise((resolve, reject) => {
-      this.productoService.updateProducto(prod).subscribe(
+      resolve(this.productoService.updateProducto(prod).subscribe(
         res => {
           if(res.status == '1')
            console.log("Stock actualizado")
         }
-      );
+      ));
     })
   }
 
