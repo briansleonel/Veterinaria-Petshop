@@ -65,11 +65,8 @@
                             <input type="date" class="form-control" id="prodVencimiento" placeholder=""
                                 style="height: 80px" name="fechaVencimiento" [(ngModel)]="producto.fechaVencimiento">
                             <label for="prodVencimiento">Fecha de Vencimiento</label>
-                            <div *ngIf="(producto.fechaVencimiento == '' || producto.fechaVencimiento == null) && vacio==true" class=" m-0 p-0 alert alert-danger align-items-center">
-                                <p class="mx-4 mt-2">*Campo requerido</p>
-                            </div>
                             <div *ngIf="producto.fechaRecepcion > producto.fechaVencimiento" class=" m-0 p-0 alert alert-danger align-items-center">
-                                <p class="mx-4 mt-2">La fecha de vencimiento no puede ser mayor a la fecha de recepción</p>
+                                <p class="mx-4 mt-2">La fecha de vencimiento no puede ser menor a la fecha de recepción</p>
                             </div>
                         </div>
                     </div>
