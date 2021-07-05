@@ -120,7 +120,7 @@ export class ReportesComponent implements OnInit {
         this.ventas = this.ventasSeleccionadas;
       }else{
         this.ventas = this.ventas2;
-        this.toastr.error("La fecha 'A:' no puede ser masyor a la fecha 'De:'", "OPERACION FALLIDA");
+        this.toastr.error("La fecha 'A:' no puede ser menor a la fecha 'De:'", "OPERACION FALLIDA");
       }
     }
   }
